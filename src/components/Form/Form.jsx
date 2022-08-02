@@ -86,13 +86,14 @@ const Form = ({ currentId, setCurrentId, setOpenPopup, openPopup }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
+    
 
-
-    if (currentId === 0) {
+    if (currentId === 0 || !currentId) {
 
       dispatch(createPost({ ...postData, name: `${user?.user?.name}`, authorAvatarUrl: `${user?.user?.avatarUrl}` }));
       clear();
-    } else {
+    } 
+    else {
    
       dispatch(editPost({ currentId: currentId, postData: { ...postData, name: `${user?.user?.name}`, authorAvatarUrl: `${user?.user?.avatarUrl}` } }));
 

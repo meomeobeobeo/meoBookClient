@@ -17,7 +17,7 @@ import { blue } from '@mui/material/colors'
 // import {} from 'react-google-lo'
 
 const intitialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
-function Auth() {
+function Auth({currentId,setCurrentId}) {
    
     const navigate = useNavigate()
     const dispatch = useDispatch()

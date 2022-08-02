@@ -38,7 +38,7 @@ function App() {
         />
         <Route
           path='/auth'
-          element={<Auth />}
+          element={<Auth currentId={currentId} setCurrentId={setCurrentId} />}
 
 
         />
