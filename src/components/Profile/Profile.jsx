@@ -125,6 +125,9 @@ const Profile = ({ user , setUser}) => {
                     <Stack direction='row' spacing={2} sx={{
                         textAlign: 'center',
                         alignItems: 'center',
+                        justifyContent :{ lg :'flex-start',md :'flex-start',sm:'flex-start' , xs :'center'}
+
+
 
 
 
