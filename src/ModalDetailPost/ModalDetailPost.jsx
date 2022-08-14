@@ -26,7 +26,7 @@ import { styled } from '@mui/material/styles';
 import BookMarkFill from '../image/BookMarkFill';
 import moment from 'moment';
 
-const ExpandMore = styled((props) => {
+const BookMark = styled((props) => {
     const { expand, ...other } = props;
 
 
@@ -48,7 +48,6 @@ const style = {
     width: { lg: '82%', md: '82%', sm: '100%', xs: '100%' },
     height: { lg: '93%', md: '93%', sm: '100%', xs: '100%' },
     bgcolor: 'background.paper',
-    boxShadow: 24,
     p: 0,
     borderRadius: '4px',
     overflow: "auto",
@@ -278,7 +277,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                             <SendSvg width='24px' height='24px' />
                                         </IconButton>
 
-                                        <ExpandMore
+                                        <BookMark
                                             expand={expanded}
                                             onClick={handleExpanded}
                                             aria-expanded={expanded}
@@ -296,7 +295,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
 
 
-                                        </ExpandMore>
+                                        </BookMark>
 
 
 

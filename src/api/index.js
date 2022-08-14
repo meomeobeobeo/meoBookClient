@@ -1,8 +1,8 @@
 import axios from 'axios';
-const url = 'https://meow-book-server.herokuapp.com'
+const url = 'http://localhost:5000'
 
 
-const API = axios.create({ baseURL: 'https://meow-book-server.herokuapp.com' })
+const API = axios.create({ baseURL: 'http://localhost:5000' })
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem('profile')){
@@ -78,4 +78,51 @@ export const followUser = ( followUserId) =>{
 
     return API.patch(`/profile/follow/${followUserId}`)
 }
+// Message method get api 
+
+
+// get /chat/conversation/:_id 
+// post /chat/conversation/:_id
+// delete /chat/conversation/:conversationId
+
+// get /chat/message/:conversationId	
+// post /chat/message/:conversationId	
+// delete /chat/message/:_id (_id is message id)
+
+
+// get all conversation of _id person 
+export const getConversation = (_id) =>{
+
+    return API.get(`/chat/conversation/${_id}`)
+}
+
+// userId is {senderId : ? , receiverId : ?}  
+//senderId is current user auth
+//receiverId is _id of person 
+
+
+export const createNewConversation  = (_id,userId) =>{
+
+
+    return API.post(`/chat/conversation/:${_id}`,userId)
+}
+// _id 
+export const deleteConversation  = (conversationId) =>{
+
+    return API.delete(`chat/conversation/:${conversationId}`)
+}
+export const getMessage  = (conversationId) =>{
+
+    return API.get(`/chat/message/${conversationId}`)
+}
+export const createMessage = (conversationId , messageData) =>{
+  
+
+    return API.post(`/chat/message/${conversationId}` , messageData)
+}
+export const deleteMessage  = (messageId) =>{
+
+    return API.delete(`/chat/message/${messageId}`)
+}
+
 

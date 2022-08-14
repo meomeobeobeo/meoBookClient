@@ -68,5 +68,5 @@ export default class FileBase64 extends React.Component {
 }
 
 FileBase64.defaultProps = {
-    multiple: false,
+    multiple: true,
 };

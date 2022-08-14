@@ -19,7 +19,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '400px',
+    width: {xs : '360px' , sm : '400px' , md : '400px' , lg : '400px'},
     height: '336px',
     bgcolor: 'background.paper',
     borderRadius: '16px',
@@ -34,7 +34,7 @@ const styleConfirmUpload = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '400px',
+    width: {xs : '360px' , sm : '400px' , md : '400px' , lg : '400px'},
     height: '188px',
     bgcolor: 'background.paper',
     borderRadius: '16px',
@@ -232,7 +232,7 @@ const Profile = ({ user , setUser}) => {
                             <Avatar src={meoLike} sx={{ width: 56, height: 56, margin: 'auto' }}>
 
                             </Avatar>
-                            <Typography variant="h6" fontWeight='600' sx={{ color: '#111', fontSize: '18px' }}>Synced profile photo</Typography>
+                            <Typography variant="h6" fontWeight='600' sx={{ color: '#111', fontSize: '18px' }}>Upload new profile photo</Typography>
                             <Typography variant='body2' color='gray' >Meo meo</Typography>
 
 

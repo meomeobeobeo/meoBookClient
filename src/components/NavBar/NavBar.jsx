@@ -96,7 +96,7 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
 
 
                         {/* messenger icon */}
-                        <IconButton onClick={
+                        <IconButton component={Link} to='/message' onClick={
                             () => {
                                 setActiveIcon({
                                     ...statusNavBar, messageIconActive: !statusNavBar.messageIconActive

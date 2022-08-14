@@ -4,16 +4,16 @@ import { FaRegComment } from "react-icons/fa"
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
     return width
-    
-   
-  }
-  
+
+
+}
+
 
 const PreviewPost = ({ currentUserPosts }) => {
     const componentRef = useRef(null)
 
-    const [currentWidth, setCurrentWidth] = useState(getWindowDimensions())
- 
+    const [currentWidth, setCurrentWidth] = useState(getWindowDimensions() * 9 / 12)
+
 
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const PreviewPost = ({ currentUserPosts }) => {
                     transform: 'translateZ(0)',
                     alignContent: 'flex-start'
                 }}
-                rowHeight={currentWidth/3}
+                rowHeight={currentWidth / 3}
                 cols={3}
                 gap={25}
                 ref={componentRef}
@@ -49,7 +49,12 @@ const PreviewPost = ({ currentUserPosts }) => {
                     const rows = 1;
 
                     return (
-                        <ImageListItem key={item._id} cols={cols} rows={rows}>
+                        <ImageListItem sx={{
+                            "&:hover": {
+                                opacity: '0.7'
+                            }
+                        }}
+                            key={item._id} cols={cols} rows={rows}>
                             <img
                                 src={item.selectedFile}
                                 alt={item.title}

@@ -17,3 +17,14 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+.imputmessage:focus-visible{
+  outline: none!important;
+  
+}
+.flex-center-row{
+  justify-content: center!important;
+  align-items: center!important;
+
+
+}
+

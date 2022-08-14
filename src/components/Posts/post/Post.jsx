@@ -30,6 +30,7 @@ import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import ModalDetailPost from '../../../ModalDetailPost/ModalDetailPost';
 import {Link} from 'react-router-dom'
+import * as api from '../../../api/index'
 
 
 
@@ -157,6 +158,22 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
         dispatch(deletePost(post._id));
 
     }
+    const handleCreateConversation = async () => {
+        let _id = user?.user?._id
+        let userId = {
+            senderId :user?.user?._id,
+            receiverId : post.authorId
+        }
+
+        const {data} = await api.createNewConversation(_id,userId)
+        
+        
+    }
+
+
+
+
+
     useEffect(() => {
         if (!moreOption) {
             setCurrentId(0)
@@ -260,7 +277,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                                         Follow.
                                     </ListItemText>
                                 </MenuItem>
-                                <MenuItem>
+                                <MenuItem component = {Link} to = '/message' onClick = {handleCreateConversation} >
                                     <ListItemIcon>
                                         <RiMessengerLine />
                                     </ListItemIcon>
@@ -291,7 +308,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
 
 
                             >
-                                <MoreVertIcon />
+                                <MoreVertIcon  />
 
                             </IconButton>
 
