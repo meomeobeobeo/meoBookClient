@@ -33,7 +33,7 @@ const SearchResults = ({ searchText , setOpen }) => {
                 width: '360px',
                 height: '360px',
                 overflow: 'auto',
-                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+               
 
 
                 zIndex: 10000000,
@@ -120,10 +120,10 @@ const SearchComponent = ({ sx }) => {
     };
 
     return (
-        <ClickAwayListener onClickAway={handleClickAway}>
+        <ClickAwayListener onClickAway={handleClickAway} >
             <Box
                 className='search-component'
-                sx={{ position: 'relative' }}
+                sx={{ position: 'relative' , display: {lg :'flex' , md :'flex' , sm :'flex' , xs :'none'}  }}
             >
 
                 <input

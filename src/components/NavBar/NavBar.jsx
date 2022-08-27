@@ -123,7 +123,7 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
                             {activeIcon.createIconActive ? <IoCreateOutline /> : <IoCreateSharp />}
                         </IconButton >
                         {/* compass icon  */}
-                        <IconButton onClick={() => {
+                        {/* <IconButton onClick={() => {
                             setActiveIcon({
                                 ...statusNavBar,
                                 compassIconActive: !statusNavBar.compassIconActive
@@ -131,7 +131,7 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
 
                         }} >
                             {activeIcon.compassIconActive ? <IoCompassOutline /> : <IoCompassSharp />}
-                        </IconButton >
+                        </IconButton > */}
 
 
                         {/* heart icon */}

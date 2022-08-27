@@ -12,6 +12,7 @@ import StoriesDetailPage from './components/Stories/StoriesDetailPage'
 import Message from './components/Message/Message'
 import { io } from 'socket.io-client'
 import BottomNavigateion from './components/bottomNavagation/BottomNavigateion'
+import SearchPage from './components/searchPage/SearchPage'
 
 
 export const UserContext = createContext()
@@ -109,6 +110,11 @@ function App() {
             path='/stories'
             element={<StoriesDetailPage />}
 
+
+          />
+          <Route
+            path={`/search`}
+            element={<SearchPage  />}
 
           />
 
