@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Avatar, Button, Container, Grid, Paper, Typography, TextField } from '@mui/material'
+import { Avatar, Button, Container, Grid, Paper, Typography, TextField, Box, Stack } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import React from 'react'
 import useStyles from './styles'
@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import { authSlice } from '../../redux/authSlice'
 import { signIn, signUp } from '../../actions/auth'
 import { blue } from '@mui/material/colors'
+import Catsvg from '../../image/Catsvg';
 
 
 
@@ -207,6 +208,15 @@ function Auth({currentId,setCurrentId}) {
                 </form>
 
             </Paper>
+
+            <Box sx={{ position: 'relative', bottom: '0', width: '100%', marginTop: '12px', display: { lg: 'block', md: 'block', sm: 'block', xs: 'block' } }}>
+                <Stack direction='row' spacing={2} justifyContent='center' mt={10} mb={2} >
+                    <Box sx={{ width: 24, height: 24, color: 'gray' }}>
+                        <Catsvg style={{ width: 24, height: 24 }} />
+                    </Box>
+                    <Typography variant="body2" display='inline-block' color="gray">Meo Meo production.</Typography>
+                </Stack>
+            </Box>
 
         </Container>
     )
