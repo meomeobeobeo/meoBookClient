@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, Fade, IconButton, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Button, Container, Fade, IconButton, Stack, Typography } from '@mui/material'
 import useStyles from './styles'
 
 
@@ -11,6 +11,7 @@ import MessageAndAction from './MessageAndAction'
 import { io } from 'socket.io-client'
 import { useRef } from 'react';
 import MessageAndActionDemo from './MessageAndActionDemo';
+import Catsvg from '../../image/Catsvg';
 export const ConversationContext = createContext()
 
 const Message = ({ user }) => {
@@ -73,14 +74,14 @@ const Message = ({ user }) => {
                 }} >
 
                     {/* Left content is user Infor , list user message */}
-                    
-                        <UserInfor />
-                   
+
+                    <UserInfor />
+
                     {/* Right component is message of user */}
                     {
-                        
-                            userDetailConnect ? <MessageAndAction /> : <MessageAndActionDemo />
-                       
+
+                        userDetailConnect ? <MessageAndAction /> : <MessageAndActionDemo />
+
                     }
 
                 </ConversationContext.Provider>
@@ -93,6 +94,14 @@ const Message = ({ user }) => {
 
 
             </Stack>
+            <Box sx={{ position: 'relative', bottom: '0', width: '100%', marginTop: '50px', display: { lg: 'block', md: 'block', sm: 'block', xs: 'block' } }}>
+                <Stack direction='row' spacing={2} justifyContent='center' mt={10} mb={2} >
+                    <Box sx={{ width: 24, height: 24, color: 'gray' }}>
+                        <Catsvg style={{ width: 24, height: 24 }} />
+                    </Box>
+                    <Typography variant="body2" display='inline-block' color="gray">Meo Meo production.</Typography>
+                </Stack>
+            </Box>
 
         </Container>
     )
