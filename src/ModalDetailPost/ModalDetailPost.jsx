@@ -46,7 +46,7 @@ const style = {
     left: { lg: '9%', md: '9%', sm: '0%', xs: '0%' },
     transform: 'translate(-50%, -50%)',
     width: { lg: '82%', md: '82%', sm: '100%', xs: '100%' },
-    height: { lg: '93%', md: '93%', sm: '100%', xs: '100vh' },
+    height: { lg: '88%', md: '88%', sm: '100%', xs: '100vh' },
     bgcolor: 'background.paper',
     p: 0,
     borderRadius: '4px',
@@ -196,7 +196,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                         ></CardMedia> */}
                                         <Box sx={{
                                             width: '100%',
-                                            height: { lg: '536px', md: '536px', sm: '536px', xs: '240px' },
+                                            height: { lg: '532px', md: '532px', sm: '532px', xs: '240px' },
                                             marginTop: '28px',
                                             marginBottom: '28px',
                                         }}>
