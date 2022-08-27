@@ -1,21 +1,38 @@
 import { IconButton, Stack, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import CallIcon from '../../image/CallIcon'
 import InforIcon from '../../image/InforIcon'
 import VideoCallIcon from '../../image/VideoCallIcon'
 import useStyles from './styles'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { ConversationContext } from './Message'
 
 const MessageAndActionDemo = () => {
     const classes = useStyles()
+    const setAppearComponent = useContext(ConversationContext).setAppearComponent
+    const appearComponent = useContext(ConversationContext).appearComponent
+    const [appear , setAppear] = useState('inline-block')
+    useLayoutEffect(()=>{
+        if(!appearComponent){
+            setAppear('inline-block')
+        }
+        else{
+            setAppear('none')
+        }
+        
+
+    },[appearComponent])
+
     return (
         <Stack
 
             flexDirection='column'
             sx={{
-                width: '60%',
+                width: {lg : '60%', md :'60%',sm : '60%' , xs : '100%'},
                 height: 'inherit',
-                position: 'relative'
+                position: 'relative',
+                display :{lg : 'inline-block', md :'inline-block',sm : 'inline-block' , xs : `${appear}`}
 
 
 
@@ -36,7 +53,7 @@ const MessageAndActionDemo = () => {
                 <Stack
                     flexDirection='row'
                     sx={{
-                        marginLeft: '40px'
+                        marginLeft: '0px'
 
 
 
@@ -46,6 +63,10 @@ const MessageAndActionDemo = () => {
 
 
                 >
+                    {/* click to back */}
+                    <IconButton  sx={{ display: { lg: 'none!important', md: 'none!important', sm: 'none!important', xs: 'inline-block' }}} onClick={() =>{setAppearComponent(true)}}>
+                        <ArrowBackIcon sx = {{color: '#262626'}} />
+                    </IconButton>
                 </Stack>
 
                 {/* Icon Button call , video call , infor User  */}
@@ -70,7 +91,7 @@ const MessageAndActionDemo = () => {
 
             </Box>
             {/* content message */}
-            <Box className='flex-center-row' sx={{ width: '100%', height: '400px', display: 'flex' }}>
+            <Box className='flex-center-row' sx={{ width: '100%', height: {lg :'400px', md :'400px' ,sm :'400px' , xs :'544px'}, display: 'flex' }}>
                 <Box>
                     <Typography
                         variant='h5'

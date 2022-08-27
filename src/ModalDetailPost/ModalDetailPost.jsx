@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, InputAdornment, Paper, Stack, TextField } from '@mui/material';
+import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Grow, IconButton, InputAdornment, Paper, Stack, TextField } from '@mui/material';
 import useStyles from './styles'
 import { useRef } from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -42,15 +42,16 @@ const BookMark = styled((props) => {
 
 const style = {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
+    top: { lg: '3%', md: '3%', sm: '0%', xs: '0%' },
+    left: { lg: '9%', md: '9%', sm: '0%', xs: '0%' },
     transform: 'translate(-50%, -50%)',
     width: { lg: '82%', md: '82%', sm: '100%', xs: '100%' },
-    height: { lg: '93%', md: '93%', sm: '100%', xs: '100%' },
+    height: { lg: '93%', md: '93%', sm: '100%', xs: '100vh' },
     bgcolor: 'background.paper',
     p: 0,
     borderRadius: '4px',
     overflow: "auto",
+    overflowX: "hidden",
 };
 
 const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAction, setLikeAction }) => {
@@ -58,13 +59,13 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
     const dispatch = useDispatch()
     const [commentData, setCommentData] = useState('')
     const [expanded, setExpanded] = useState(false)
-   
+
 
     const handleExpanded = () => {
         setExpanded(!expanded)
 
     }
-    
+
 
 
 
@@ -83,7 +84,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
     const handleChangeInputComment = (e) => {
         setCommentData(e.target.value)
-       
+
 
     }
 
@@ -125,10 +126,14 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
                 }}
             >
-                <Fade in={openDetailPost}>
+                <Grow
+                    style={{ transformOrigin: '50% 50%' }}
+                    {...(openDetailPost ? { timeout: 200 } : {})}
+                    in={openDetailPost}>
                     <Box sx={style}>
                         <Stack direction='row' sx={{
                             flexWrap: 'wrap',
+                            width: '100%',
 
                         }}>
                             <Box
@@ -141,49 +146,70 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                 }}>
 
                                 <Box sx={{
-                                    marginTop: '28px',
-                                    marginBottom: '28px',
+
+                                    width: '100%',
+                                    height: '100%',
 
                                 }}>
-                                    <Card
+                                    <Stack
+                                        direction='column'
                                         className={classes.card}
 
 
                                     >
-                                        <CardHeader
+                                        <Box
                                             sx={{
                                                 boxShadow: 'none',
                                                 width: '100%',
+                                                height: '32px',
                                                 display: { xs: 'block', sm: 'block', md: 'none', lg: 'none' },
                                                 borderBottom: '1px solid #ccc',
                                                 backgroundColor: '#ccc',
                                                 padding: 1,
 
+
+
                                             }}
                                             onClick={handleClose}
 
-                                            action={
-                                                <IconButton aria-label="settings"  >
-                                                    <Typography variant='body2' fontWeight='600' color='primary'>Exit</Typography>
-                                                </IconButton>
-                                            }
 
 
 
 
-                                        />
 
-                                        <CardMedia
+                                        >
+                                            <IconButton aria-label="settings"  >
+                                                <Typography variant='body2' fontWeight='600' color='primary'>Exit</Typography>
+                                            </IconButton>
+                                        </Box>
+
+                                        {/* <CardMedia
                                             component="img"
-                                            height="536"
+
                                             image={post.selectedFile}
                                             alt="img post"
                                             sx={{
+                                                height: { lg: '536px', md: '536px', sm: '536px', xs: '536px' }
 
 
                                             }}
-                                        ></CardMedia>
-                                    </Card>
+                                        ></CardMedia> */}
+                                        <Box sx={{
+                                            width: '100%',
+                                            height: { lg: '536px', md: '536px', sm: '536px', xs: '240px' },
+                                            marginTop: '28px',
+                                            marginBottom: '28px',
+                                        }}>
+                                            <img src={post.selectedFile}
+                                                alt="meomeo"
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: 'cover'
+                                                }} />
+
+                                        </Box>
+                                    </Stack>
                                 </Box>
 
 
@@ -198,36 +224,47 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                 }}
                             >
 
-                                <Card
+                                <Stack
+                                    direction='column'
                                     className={classes.card}
-                                    sx={{}}
+                                    sx={{
+                                        width: '100%',
+                                    }}
                                 >
-                                    <CardHeader
+                                    <Box
                                         sx={{
+                                            position: 'relative',
                                             boxShadow: 'none',
-                                            width: '96%',
-                                            borderBottom: '1px solid #ccc'
+                                            height: '48px',
+                                            width: '100%',
+                                            justifyContent: 'flex-start',
+                                            alignItems: 'center',
+                                            borderBottom: '1px solid #ccc',
+                                            display: { lg: 'flex', md: 'flex', sm: 'flex', xs: 'none' }
 
                                         }}
-                                        avatar={
+
+
+
+
+
+                                    >
+
+                                        <Stack direction='row' sx={{ marginLeft: '12px' }} spacing={2} >
                                             <Avatar src={user?.user?.avatarUrl} sx={{ width: 24, height: 24 }} aria-label="recipe">
 
                                             </Avatar>
-                                        }
-                                        action={
-                                            <IconButton aria-label="settings">
-                                                <MoreVertIcon />
-                                            </IconButton>
-                                        }
-                                        title={
-
                                             <Typography variant='body2' fontWeight={600} sx={{ color: '#262626', display: 'inline-block', paddingRight: '8px' }}>{user?.user?.name}</Typography>
+                                        </Stack>
 
-                                        }
+                                        <Box sx={{
+                                            position: 'absolute',
+                                            right: '12px',
+                                        }} aria-label="settings">
+                                            <MoreVertIcon />
+                                        </Box>
 
-
-
-                                    />
+                                    </Box>
 
                                     <Comment
                                         comments={post.comments}
@@ -245,7 +282,10 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                     {/* Emotion and action  */}
 
                                     <CardActions disableSpacing>
-                                        <IconButton
+                                        <Box
+                                            sx={{
+                                                padding: '4px'
+                                            }}
                                             onClick={(e) => {
                                                 handleLikePost()
                                                 setLikeAction(!likeAction)
@@ -256,7 +296,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
 
 
-                                        </IconButton>
+                                        </Box>
                                         {/* 
                     
                     
@@ -266,16 +306,16 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                     
                     
                                             */}
-                                        <IconButton aria-label='comment' sx={{ marginLeft: '4px' }} onClick={() => {
+                                        <Box aria-label='comment' sx={{ marginLeft: '4px', padding: '4px' }} onClick={() => {
                                             setOpenDetailPost(true)
 
 
                                         }}  >
                                             <CommentSvg width='24px' height='24px' />
-                                        </IconButton>
-                                        <IconButton aria-label='send' sx={{ marginLeft: '4px' }} >
+                                        </Box>
+                                        <Box aria-label='send' sx={{ marginLeft: '4px', padding: '4px' }} >
                                             <SendSvg width='24px' height='24px' />
-                                        </IconButton>
+                                        </Box>
 
                                         <BookMark
                                             expand={expanded}
@@ -320,7 +360,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
 
                                     {/* textField add comment */}
-                                    <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', margin: '16px 8px' }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', margin: '16px 8px', marginBottom: { lg: '16px', md: '16px', sm: '16px', xs: '64px' } }}>
 
                                         <TextField
                                             value={commentData}
@@ -360,7 +400,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
 
 
-                                </Card>
+                                </Stack>
 
                             </Box>
 
@@ -371,7 +411,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
 
                     </Box>
-                </Fade>
+                </Grow>
             </Modal>
 
 

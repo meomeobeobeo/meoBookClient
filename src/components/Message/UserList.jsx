@@ -8,18 +8,19 @@ import UserDetailConnect from './UserDetailConnect'
 import { ConversationContext } from './Message'
 const UserList = ({ senderList }) => {
 
-  const {conversationId, setConversationId} = useContext(ConversationContext)
-  
-  
-
- 
+  const { conversationId, setConversationId } = useContext(ConversationContext)
 
 
 
 
 
 
-  
+
+
+
+
+
+
 
 
 
@@ -36,9 +37,9 @@ const UserList = ({ senderList }) => {
       {/* List user component  */}
 
       {
-        senderList.map((child)=>{
+        senderList.map((child) => {
           return (
-            <UserDetailConnect key = {child.personId} userId = {child.personId} conversationId ={child.conversationId} setConversationId = {setConversationId}   />
+            <UserDetailConnect  key={child.personId} userId={child.personId} conversationId={child.conversationId} setConversationId={setConversationId} />
           )
         })
       }

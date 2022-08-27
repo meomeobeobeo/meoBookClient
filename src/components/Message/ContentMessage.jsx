@@ -18,7 +18,7 @@ const styleConfirmDelete = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '400px',
+    width: '360px',
     height: '188px',
     bgcolor: 'background.paper',
     borderRadius: '16px',
@@ -29,63 +29,63 @@ const styleConfirmDelete = {
 
 
 };
-const ModalDeleteMessage = ({ openConfirmDeleteMessage, handleCloseConfirmDeleteMessage, messageId ,messages , setMessages , refSocket }) => {
+const ModalDeleteMessage = ({ openConfirmDeleteMessage, handleCloseConfirmDeleteMessage, messageId, messages, setMessages, refSocket }) => {
 
 
     const [mouseDown1, setmouseDown1] = useState(false)
     const [mouseDown2, setmouseDown2] = useState(false)
     const userConnect = useContext(ConversationContext).userDetailConnect
-    const user = useContext(UserContext)
+    const user = useContext(UserContext).user
     const [arrivalMessage, setArrivalMessage] = useState(null)
 
 
-    
+
 
     const classes = useStyles()
-    
-    
-    
+
+
+
 
 
 
 
     const handleDeleteComment = async () => {
         await api.deleteMessage(messageId)
-        const newMessages = messages.filter((message) =>{
+        const newMessages = messages.filter((message) => {
             return message.messageId !== messageId
         })
         setMessages(newMessages)
-        refSocket.current.emit('deleteMessage',{
-            senderId : user?.user?._id,
-            messageId:messageId ,
-            receiverId :userConnect?._id
+        refSocket.current.emit('deleteMessage', {
+            senderId: user?.user?._id,
+            messageId: messageId,
+            receiverId: userConnect?._id
         })
-       
-        
+
+
 
 
     }
-    useEffect(()=>{
+    useEffect(() => {
         refSocket.current.on("getDeleteMessage", (data) => {
             console.log(data)
-            const newMessages = messages.filter((message) =>{
-                return message.messageId !== data?.messageId
+            const newMessages = messages.filter((message) => {
+                return message?.messageId !== data?.messageId
             })
             setMessages(newMessages)
 
-           
 
-            
+
+
         })
 
-    },[refSocket])
+    }, [messages, refSocket, setMessages])
 
     // useEffect(() => {
     //     const newMessages = messages.filter((message) =>{
     //         return message.messageId !== arrivalMessage?.messageId
     //     })
     //     setMessages(newMessages)
-       
+
 
     // }, [arrivalMessage, messages, setMessages])
 
@@ -143,14 +143,14 @@ const ModalDeleteMessage = ({ openConfirmDeleteMessage, handleCloseConfirmDelete
 
 
 // own is props exac current auth person .
-const ContentMessage = ({ own, messageData , messages , setMessages , refSocket }) => {
+const ContentMessage = ({ own, messageData, messages, setMessages, refSocket }) => {
     const classes = useStyles()
     const userConnect = useContext(ConversationContext).userDetailConnect
     const [openConfirmDeleteMessage, setOpenConfirmDeleteMessage] = useState(false)
     const handleCloseConfirmDeleteMessage = () => {
         setOpenConfirmDeleteMessage(false)
     }
-    
+
 
     return (
         <>
@@ -165,6 +165,7 @@ const ContentMessage = ({ own, messageData , messages , setMessages , refSocket 
 
                 }}>
                     {
+                        // set action with own message is current user
                         own && (
                             <Stack direction='row'>
                                 <IconButton
@@ -172,7 +173,7 @@ const ContentMessage = ({ own, messageData , messages , setMessages , refSocket 
                                         setOpenConfirmDeleteMessage(true)
                                     }}
                                     className={!own ? classes.ownIcon : ''} >
-                                    <AiOutlineDelete />
+                                    <AiOutlineDelete style={{ color: '#262626' }} />
                                 </IconButton>
                                 <IconButton>
                                     <LikeUnactive width={24} height={24} />
@@ -182,7 +183,9 @@ const ContentMessage = ({ own, messageData , messages , setMessages , refSocket 
                     }
 
                     <Avatar className={own ? classes.ownAvatar : ''} sx={{ width: 24, height: 24 }} src={userConnect?.avatarUrl}></Avatar>
-                    <Stack direction='column'>
+
+                    {/* content Of message  */}
+                    <Stack direction='column' sx={{ position: 'relative' }}  >
                         <Typography variant="body2" color="gray" fontSize={12} sx={{
                             margin: '0 12px 4px 24px'
                         }} >{moment(messageData?.createdAt).calendar()}</Typography>
@@ -192,7 +195,7 @@ const ContentMessage = ({ own, messageData , messages , setMessages , refSocket 
                                 <Typography className={own ? classes.ownContent : ''} fontSize={14} variant='body2' sx={{
                                     padding: '16px 16px',
                                     margin: '0 0 0 12px',
-                                    maxWidth: '300px!important',
+                                    maxWidth: '200px!important',
                                     border: '1px solid #ccc',
                                     borderRadius: '20px',
                                     height: 'auto',
@@ -212,25 +215,39 @@ const ContentMessage = ({ own, messageData , messages , setMessages , refSocket 
 
                                 return (
 
-                                    <BoxOfImage
-                                        key={index}
-                                        imgData={imgData}
+                                    <div key={index}>
+                                        <BoxOfImage
 
-                                    >
+                                            imgData={imgData}
 
-                                    </BoxOfImage>
+                                        >
+
+                                        </BoxOfImage>
+                                    </div>
 
 
                                 )
                             })
 
                         }
+                        {/* the likes of message  */}
+                        <IconButton sx={{
+                            p: '2px',
+                            backgroundColor: '#fff',
+                            position: 'absolute',
+
+
+
+                        }}>
+                            <LikeActive width={16} height={16} />
+                        </IconButton>
 
 
 
                     </Stack>
 
                     {
+                        // set action with own message is client user 
                         !own &&
                         (
                             <Stack direction='row'>
@@ -248,11 +265,13 @@ const ContentMessage = ({ own, messageData , messages , setMessages , refSocket 
 
 
 
+
                 </Stack>
+
 
             </Stack>
             {/* modal delete message */}
-        <ModalDeleteMessage refSocket={refSocket} messages = { messages} setMessages = {setMessages} openConfirmDeleteMessage={openConfirmDeleteMessage} handleCloseConfirmDeleteMessage={handleCloseConfirmDeleteMessage} messageId={messageData?.messageId} />
+            <ModalDeleteMessage refSocket={refSocket} messages={messages} setMessages={setMessages} openConfirmDeleteMessage={openConfirmDeleteMessage} handleCloseConfirmDeleteMessage={handleCloseConfirmDeleteMessage} messageId={messageData?.messageId} />
         </>
     )
 }

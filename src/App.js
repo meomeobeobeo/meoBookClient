@@ -11,6 +11,7 @@ import UserProfile from './components/UserProfile/UserProfile'
 import StoriesDetailPage from './components/Stories/StoriesDetailPage'
 import Message from './components/Message/Message'
 import { io } from 'socket.io-client'
+import BottomNavigateion from './components/bottomNavagation/BottomNavigateion'
 
 
 export const UserContext = createContext()
@@ -25,22 +26,47 @@ function App() {
   const [currentId, setCurrentId] = useState()
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
   const socket = useRef()
-//   useEffect(() => {
-//     socket.current = io("ws://localhost:8900")
-//     socket.current.on('welcome',data=>{
-//       console.log(data)
-//     })
+  const [userStatus, setUserStatus] = useState([])
 
-//     socket.current.emit('addUser', user?.user?._id)
-//         socket.current.on('getUsers', users => {
-//             console.log(users)
 
-//         })
-    
 
-// },[user])
 
-  
+  useEffect(() => {
+
+    socket.current = io("https://meo-book-server.herokuapp.com")
+
+
+  }, [])
+  useEffect(() => {
+    if (user) {
+      socket.current.emit('addActiveUser', user?.user?._id)
+      socket.current.on('getActiveUser', activeUsers => {
+        let process = []
+         user?.user?.friendList.forEach(friendId => {
+
+
+          if (activeUsers?.find(data => data.userId === friendId)) {
+            process.push({
+              friendId: friendId,
+              status: 'active'
+            })
+            
+          }
+          
+
+        })
+      
+
+        setUserStatus(process)
+
+      })
+    }
+
+
+  }, [user])
+
+
+
 
 
 
@@ -50,58 +76,60 @@ function App() {
 
 
   return (
-    <UserContext.Provider value={user}  >
-     
-        <BrowserRouter>
-          <NavBar currentId={currentId} setCurrentId={setCurrentId} user={user} setUser={setUser} />
+    <UserContext.Provider value={{ user, socket: socket, userStatus: userStatus }}  >
 
-          <Routes>
-            <Route
-              path='/'
-              element={<Home currentId={currentId} setCurrentId={setCurrentId} user={user} />}
-            />
-            <Route
-              path='/auth'
-              element={<Auth currentId={currentId} setCurrentId={setCurrentId} />}
+      <BrowserRouter>
+        <NavBar currentId={currentId} setCurrentId={setCurrentId} user={user} setUser={setUser} />
 
-
-            />
-            <Route
-              path={`/profile/${user?.user?._id || 'undifine'}`}
-              element={<Profile user={user} setUser={setUser} />}
-
-            />
-            <Route
-              path={'/userProfile/:userId'}
-              element={<UserProfile currentUser={user} />}
-            />
-            <Route
-              path={'/message'}
-              element={<Message user={user} />}
-            />
-            <Route
-              path='/stories'
-              element={<StoriesDetailPage />}
+        <Routes>
+          <Route
+            path='/'
+            element={<Home currentId={currentId} setCurrentId={setCurrentId} user={user} />}
+          />
+          <Route
+            path='/auth'
+            element={<Auth currentId={currentId} setCurrentId={setCurrentId} />}
 
 
-            />
+          />
+          <Route
+            path={`/profile/${user?.user?._id || 'undifine'}`}
+            element={<Profile user={user} setUser={setUser} />}
 
-          </Routes>
-          <footer style={{ position: 'relative', bottom: '0', width: '100%', marginTop: '100px' }}>
-            <Stack direction='row' spacing={2} justifyContent='center' mt={10} mb={4} >
-              <Box sx={{ width: 24, height: 24, color: 'gray' }}>
-                <Catsvg style={{ width: 24, height: 24 }} />
-              </Box>
-              <Typography variant="body2" display='inline-block' color="gray">Meo Meo production.</Typography>
-            </Stack>
-          </footer>
-        </BrowserRouter>
-      
+          />
+          <Route
+            path={'/userProfile/:userId'}
+            element={<UserProfile currentUser={user} />}
+          />
+          <Route
+            path={'/message'}
+            element={<Message user={user} />}
+          />
+          <Route
+            path='/stories'
+            element={<StoriesDetailPage />}
+
+
+          />
+
+        </Routes>
+        <BottomNavigateion currentId={currentId} setCurrentId={setCurrentId} />
+        {/* <Box sx={{ position: 'relative', bottom: '0', width: '100%', marginTop: '50px', display: { lg: 'block', md: 'block', sm: 'block', xs: 'block' } }}>
+          <Stack direction='row' spacing={2} justifyContent='center' mt={10} mb={2} >
+            <Box sx={{ width: 24, height: 24, color: 'gray' }}>
+              <Catsvg style={{ width: 24, height: 24 }} />
+            </Box>
+            <Typography variant="body2" display='inline-block' color="gray">Meo Meo production.</Typography>
+          </Stack>
+        </Box> */}
+
+      </BrowserRouter>
+
     </UserContext.Provider>
 
 
   );
 }
 
- 
+
 export default App;

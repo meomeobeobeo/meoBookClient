@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Typography, IconButton, Modal, Backdrop, Fade, Box } from '@mui/material'
+import { Typography, IconButton, Modal, Backdrop, Fade, Box } from '@mui/material'
 import { AiOutlineClose } from 'react-icons/ai'
 
 
@@ -10,10 +10,12 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: { lg: '60%', md: '60%', sm: '80%', xs: '80%' },
-  height: { lg: '70%', md: '70%', sm: '70%', xs: '70%' },
+  width: { lg: '60%', md: '60%', sm: '70%', xs: '100%' },
+  height: { lg: '70%', md: '70%', sm: '70%', xs: '100%' },
   bgcolor: 'background.paper',
-  p: 2,
+  p: 4,
+  overflow: 'auto'
+
 };
 
 const FormLog = (props) => {
@@ -42,7 +44,8 @@ const FormLog = (props) => {
             <Box sx={{
 
               display: 'flex',
-              justifyContent: 'space-between'
+              justifyContent: 'space-between',
+              p: 2,
             }}>
               <Typography variant="h6" color="gray">{title}</Typography>
               <IconButton sx={{ marginLeft: '100px', marginTop: '-24px', marginRight: '-24px' }} onClick={() => {
@@ -51,7 +54,10 @@ const FormLog = (props) => {
                 <AiOutlineClose />
               </IconButton>
             </Box>
-            {children}
+            <Box>
+              {children}
+            </Box>
+
           </Box>
         </Fade>
       </Modal>

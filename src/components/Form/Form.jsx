@@ -216,24 +216,7 @@ const Form = ({ currentId, setCurrentId, setOpenPopup, openPopup }) => {
 
 
 
-            {/* <label htmlFor="form-post">
-              <input name='selectedFile' id='form-post' style={{ display: 'none' }} type='file' onChange={async (e) => {
-
-               
-              
-
-
-                setPostData({ ...postData, selectedFile: e.target.files})
-
-
-
-              }} ></input>
-
-
-              <FcAddImage fontSize={24} />
-
-
-            </label> */}
+            
 
 
           </IconButton>

@@ -1,4 +1,4 @@
-import { Avatar, Typography } from '@mui/material'
+import { Avatar, Stack, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useState } from 'react'
 import ModalDeleteComment from './ModalDeleteComment'
@@ -19,7 +19,7 @@ const CommentDetail = ({ comment, postId, allowEditOrDelete, confirmWriteComment
     const handleCloseModalEditComment = () => {
         setOpenModalEditComment(false)
     }
-    
+
 
 
 
@@ -40,14 +40,18 @@ const CommentDetail = ({ comment, postId, allowEditOrDelete, confirmWriteComment
                     margin: 0,
                     padding: 0,
                     display: 'flex',
-                    alignItems: 'center'
+                   
+                    flexDirection: 'row',
                 }}>
                     <Avatar sx={{ display: 'inline-block', width: 32, height: 32 }} src={comment.avatarUrl} alt='img'>
                         {comment.name[0]}
 
                     </Avatar>
-                    <Typography variant='body2' fontWeight={600} sx={{ color: '#111', display: 'inline-block', marginLeft: 2, }}   >{comment.name}</Typography>
-                    <Typography variant='body2' fontWeight={400} sx={{ color: 'gray', display: 'inline-block', marginLeft: 1, p: 1 }}>{comment.content}</Typography>
+                    <Stack direction="column">
+                        <Typography variant='body2' fontWeight={600} sx={{ color: '#111', display: 'inline-block', marginLeft: 2, }}   >{comment.name}</Typography>
+                        <Typography variant='body2' fontWeight={400} sx={{ color: '#111', display: 'inline-block', marginLeft: 1, p:2 , backgroundColor :'#efefef' , borderRadius:'12px' , maxWidth:'90%'   }}>{comment.content}</Typography>
+
+                    </Stack>
 
                 </Box>
 
@@ -55,8 +59,8 @@ const CommentDetail = ({ comment, postId, allowEditOrDelete, confirmWriteComment
                 {
                     allowEditOrDelete && (
                         <Box
-                            sx = {{
-                                marginLeft : 3
+                            sx={{
+                                marginLeft: 3
                             }}
                         >
 
@@ -70,13 +74,14 @@ const CommentDetail = ({ comment, postId, allowEditOrDelete, confirmWriteComment
                                     color: 'gray',
                                     display: 'inline-block',
                                     marginLeft: 1,
-                                    p: 2,
+                                    p: 1,
                                     cursor: 'pointer',
                                 }}>
 
                                 <Typography
                                     variant='body2'
                                     fontWeight={500}
+                                    fontSize={12}
 
                                 >Delete
 
@@ -91,27 +96,28 @@ const CommentDetail = ({ comment, postId, allowEditOrDelete, confirmWriteComment
                                 confirmWriteComment && (
                                     <Box onClick={() => {
                                         setOpenModalEditComment(true)
-        
-        
+
+
                                     }}
                                         sx={{
                                             color: 'gray',
                                             display: 'inline-block',
-                                            marginLeft: 1,
-                                            p: 2,
-                                            cursor: 'pointer',
                                             
+                                            p: 1,
+                                            cursor: 'pointer',
+
                                         }}>
-        
+
                                         <Typography
                                             variant='body2'
                                             fontWeight={500}
-        
+                                            fontSize={12}
+
                                         >Edit
-        
-        
+
+
                                         </Typography>
-        
+
                                     </Box>
                                 )
                             }

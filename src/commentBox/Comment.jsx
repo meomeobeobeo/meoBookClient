@@ -15,7 +15,7 @@ const Comment = ({ comments, authorId, user, postId }) => {
         <CardContent
           sx={{
             display: 'flex',
-            minHeight: '310px',
+            minHeight: {lg : '310px' , md : '310px' , sm : '310px' , xs : '200px'},
             alignItems: 'center',
             alignContent: 'center',
             justifyContent: 'center',
@@ -56,7 +56,7 @@ const Comment = ({ comments, authorId, user, postId }) => {
       <CardContent
         sx={{
           display: 'flex',
-          minHeight: '310px',
+          minHeight: '200px',
           maxHeight: '310px',
           overflow: 'auto'
 
@@ -69,8 +69,8 @@ const Comment = ({ comments, authorId, user, postId }) => {
 
           width: '100%',
           position: 'relative',
-          minHeight: '310px',
-          maxHeight: '310px',
+          minHeight: {lg : '310px' , md : '310px' , sm : '310px' , xs : '310px'},
+          maxHeight: {lg : '310px' , md : '310px' , sm : '310px' , xs : '310px'},
 
 
 

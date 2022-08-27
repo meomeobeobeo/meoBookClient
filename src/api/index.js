@@ -1,8 +1,8 @@
 import axios from 'axios';
-const url = 'http://localhost:5000'
+const url = 'https://meo-book-server.herokuapp.com'
 
 
-const API = axios.create({ baseURL: 'http://localhost:5000' })
+const API = axios.create({ baseURL: 'https://meo-book-server.herokuapp.com' })
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem('profile')){
@@ -52,7 +52,8 @@ export const signUp = (formData) => {
 
 //  call method POST /profile/changeAvartar/:id    id is id of user in mongob server 
 export const updateAvatar = (id , data) =>{
-    return API.post(`profile/changeAvartar/:${id}`,data)
+    console.log(data);
+    return API.post(`profile/changeAvartar/${id}`,data)
 }
 // GET method to get userData from database
 export const getUserData = (_id)=>{
@@ -104,7 +105,7 @@ export const getConversation = (_id) =>{
 export const createNewConversation  = (_id,userId) =>{
 
 
-    return API.post(`/chat/conversation/:${_id}`,userId)
+    return API.post(`/chat/conversation/${_id}`,userId)
 }
 // _id 
 export const deleteConversation  = (conversationId) =>{
@@ -123,6 +124,11 @@ export const createMessage = (conversationId , messageData) =>{
 export const deleteMessage  = (messageId) =>{
 
     return API.delete(`/chat/message/${messageId}`)
+}
+// GET Method to filter users in list by name 
+// get /profile/filter/:searchText
+export const filterUser = (searchText) =>{
+    return API.get(`/profile/filter/${searchText}`)
 }
 
 

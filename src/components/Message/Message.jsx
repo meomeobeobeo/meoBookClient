@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, IconButton, Stack, Typography } from '@mui/material'
+import { Avatar, Button, Container, Fade, IconButton, Stack, Typography } from '@mui/material'
 import useStyles from './styles'
 
 
@@ -27,8 +27,9 @@ const Message = ({ user }) => {
     const classes = useStyles()
     // conversation id will be set when click the user panel in user List Component 
     const [conversationId, setConversationId] = useState('')
-    const [ userDetailConnect ,setUserDetailConnect ] = useState(null)
- 
+    const [userDetailConnect, setUserDetailConnect] = useState(null)
+    const [appearComponent, setAppearComponent] = useState(true)
+
 
 
 
@@ -43,12 +44,16 @@ const Message = ({ user }) => {
 
 
             <Stack
-                direction='row'
+
                 spacing={0}
                 sx={{
                     width: '100%',
-                    height: { lg: '544px', md: '544px', sm: '544px', xs: '544px' },
+                    height: { lg: '544px', md: '544px', sm: '544px', xs: 'auto' },
                     border: '1px solid #ccc',
+                    flexDirection: {
+                        lg: 'row', md: 'row', sm: 'row', xs: 'row'
+                    },
+                    overflow: 'hidden',
 
 
                 }}
@@ -59,18 +64,24 @@ const Message = ({ user }) => {
 
                 {/* send data is conversationId to child component */}
                 <ConversationContext.Provider value={{
-                    conversationId:conversationId, 
-                    setConversationId : setConversationId,
-                    userDetailConnect : userDetailConnect,
-                    setUserDetailConnect:setUserDetailConnect
+                    conversationId: conversationId,
+                    setConversationId: setConversationId,
+                    userDetailConnect: userDetailConnect,
+                    setUserDetailConnect: setUserDetailConnect,
+                    appearComponent: appearComponent,
+                    setAppearComponent: setAppearComponent,
                 }} >
 
                     {/* Left content is user Infor , list user message */}
-                    <UserInfor  />
+                    
+                        <UserInfor />
+                   
                     {/* Right component is message of user */}
-                   {
-                    userDetailConnect ? <MessageAndAction  />: <MessageAndActionDemo  />
-                   }
+                    {
+                        
+                            userDetailConnect ? <MessageAndAction /> : <MessageAndActionDemo />
+                       
+                    }
 
                 </ConversationContext.Provider>
 

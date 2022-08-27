@@ -1,4 +1,4 @@
-import react, { useEffect, useRef } from 'react';
+import react, { useContext, useEffect, useLayoutEffect, useRef } from 'react';
 import { useState } from 'react'
 import { styled } from '@mui/material/styles';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, IconButton, Typography, Button, Tooltip, Divider, MenuItem, Menu, Box, TextField, InputAdornment, Stack } from '@mui/material'
@@ -29,8 +29,9 @@ import LikeActive from '../../../image/LikeActive';
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import ModalDetailPost from '../../../ModalDetailPost/ModalDetailPost';
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as api from '../../../api/index'
+import { UserContext } from '../../../App';
 
 
 
@@ -78,11 +79,14 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
     const [moreOption, setMoreOption] = useState(false)
     const [disabled, setDisabled] = useState(false)
     const [commentData, setCommentData] = useState('')
+    const [isActive, setIsactive] = useState('none')
+    const userStatus = useContext(UserContext).userStatus
+
 
 
     const exactAuthor = user?.user?._id === post.authorId
-    const linkToProfile = user && exactAuthor ? `/profile/${user.user._id }`:  `/userProfile/${post.authorId}`
-  
+    const linkToProfile = user && exactAuthor ? `/profile/${user.user._id}` : `/userProfile/${post.authorId}`
+    const navigate = useNavigate()
 
 
 
@@ -95,13 +99,13 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
     const previewComment = [
 
     ]
-    if(post.comments.length > 10){
+    if (post.comments.length > 10) {
         previewComment.push(post.comments[0])
         previewComment.push(post.comments[1])
 
     }
-   
-    
+
+
 
 
     // check current user like the post
@@ -112,8 +116,28 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
 
     const commentRef = useRef()
     const [openDetailPost, setOpenDetailPost] = useState(false);
+
     
-    
+
+
+
+    // effect user is active
+    useLayoutEffect(() => {
+
+        userStatus?.forEach(element => {
+
+            if (element?.friendId === post.authorId && element?.status === 'active') {
+                setIsactive('block')
+
+
+            }
+
+
+        });
+
+    }, [post.authorId, userStatus, userStatus.length])
+
+
 
 
 
@@ -132,8 +156,8 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                 avatarUrl: user?.user?.avatarUrl,
                 name: user?.user?.name,
                 content: commentData,
-                commentId :uuidv4(),
-                userId : user?.user?._id,
+                commentId: uuidv4(),
+                userId: user?.user?._id,
             }
         }))
 
@@ -142,7 +166,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
     }
     const handleChangeInputComment = (e) => {
         setCommentData(e.target.value)
-        
+
 
     }
 
@@ -161,13 +185,13 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
     const handleCreateConversation = async () => {
         let _id = user?.user?._id
         let userId = {
-            senderId :user?.user?._id,
-            receiverId : post.authorId
+            senderId: user?.user?._id,
+            receiverId: post.authorId
         }
 
-        const {data} = await api.createNewConversation(_id,userId)
-        
-        
+        const { data } = await api.createNewConversation(_id, userId)
+
+
     }
 
 
@@ -190,8 +214,8 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
             >
                 <CardHeader
 
-                    sx = {{
-                        padding:1
+                    sx={{
+                        padding: 1
 
                     }}
                     avatar={
@@ -208,17 +232,31 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                                     aria-haspopup="true"
                                     aria-expanded={open ? 'true' : undefined}
                                 >
-
-                                    <Avatar
-                                        sx={{ bgcolor: purple[500], padding:0 }}
-                                        aria-label='recipe'
-                                        src={post.authorAvatarUrl}
+                                    <Box sx={{ position: 'relative' }}>
 
 
 
-                                    >
-                                        {post.name[0]}
-                                    </Avatar>
+                                        <Avatar
+                                            sx={{ bgcolor: purple[500], padding: 0, width: 40, height: 40 }}
+                                            aria-label='recipe'
+                                            src={post.authorAvatarUrl}
+
+
+                                        >
+                                            {post.name[0]}
+                                        </Avatar>
+
+
+
+
+                                        {/* 
+                            
+                            status active of user 
+                            
+                            */}
+                                        <Box sx={{ display: `${isActive}` }} className='dot-sm'></Box>
+                                   
+                                    </Box>
                                 </IconButton>
                             </Tooltip>
                             {/* menu list option of person to connect as follow , make friend and message */}
@@ -257,8 +295,8 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             >
-                                <MenuItem component={Link} to={linkToProfile}onClick = {()=>{
-                                 
+                                <MenuItem component={Link} to={linkToProfile} onClick={() => {
+
                                 }} >
                                     <ListItemIcon>
                                         <AiOutlineProfile />
@@ -277,7 +315,13 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                                         Follow.
                                     </ListItemText>
                                 </MenuItem>
-                                <MenuItem component = {Link} to = '/message' onClick = {handleCreateConversation} >
+                                <MenuItem  onClick={() => {
+                                    if (post.authorId !== user?.user?._id) {
+                                        handleCreateConversation()
+                                        navigate('/message',{ replace: true})
+                                    }
+                                    
+                                }} >
                                     <ListItemIcon>
                                         <RiMessengerLine />
                                     </ListItemIcon>
@@ -308,7 +352,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
 
 
                             >
-                                <MoreVertIcon  />
+                                <MoreVertIcon />
 
                             </IconButton>
 
@@ -401,7 +445,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                     
                     
                     */}
-                    <IconButton aria-label='comment' sx={{ marginLeft: '4px' }} onClick = {()=>{
+                    <IconButton aria-label='comment' sx={{ marginLeft: '4px' }} onClick={() => {
                         setOpenDetailPost(true)
 
 
@@ -437,24 +481,24 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                     <Box>
                         {
                             post.comments.length > 10 && (
-                                
-                                  previewComment.map(comment =>
-                                        <Box key = {comment.commentId}>
-        
-                                            <Typography variant='body2' fontWeight={600} sx={{ color: '#262626', display: 'inline-block', paddingRight: '8px' }}>{comment.name}</Typography>
-                                            <Typography variant='body2' fontWeight={400} sx={{ color: 'gray', display: 'inline-block' }}>{comment.content}</Typography>
-                                            <br></br>
-        
-                                        </Box>
-        
-                                    )
-                                
+
+                                previewComment.map(comment =>
+                                    <Box key={comment.commentId}>
+
+                                        <Typography variant='body2' fontWeight={600} sx={{ color: '#262626', display: 'inline-block', paddingRight: '8px' }}>{comment.name}</Typography>
+                                        <Typography variant='body2' fontWeight={400} sx={{ color: 'gray', display: 'inline-block' }}>{comment.content}</Typography>
+                                        <br></br>
+
+                                    </Box>
+
+                                )
+
                             )
 
 
 
 
-                          
+
                         }
                     </Box>
                 </Stack>
@@ -519,7 +563,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
             </FormLog>
 
             {/* Open modal detail Post  */}
-        <ModalDetailPost  key = {post._id} likeAction = {likeAction}  setLikeAction = {setLikeAction} openDetailPost = {openDetailPost} setOpenDetailPost = {setOpenDetailPost} post ={post} user = {user}   />
+            <ModalDetailPost key={post._id} likeAction={likeAction} setLikeAction={setLikeAction} openDetailPost={openDetailPost} setOpenDetailPost={setOpenDetailPost} post={post} user={user} />
 
 
 

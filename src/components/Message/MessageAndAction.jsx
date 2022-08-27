@@ -1,5 +1,5 @@
 import { Avatar, Box, IconButton, Stack, Typography } from '@mui/material'
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
+import React, { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import CallIcon from '../../image/CallIcon'
 import Emotion from '../../image/Emotion'
 import ImageIcon from '../../image/ImageIcon'
@@ -14,6 +14,8 @@ import { ConversationContext } from './Message'
 import * as api from '../../api/index'
 import { v4 as uuidv4 } from 'uuid';
 import FileBase64 from '../../FileBase64'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 // import FileBase64 from 'react-file-base64'
 
 
@@ -22,12 +24,27 @@ import FileBase64 from '../../FileBase64'
 const MessageAndAction = () => {
 
     const classes = useStyles()
-    const user = useContext(UserContext)
+    const user = useContext(UserContext).user
     const userDetailConnect = useContext(ConversationContext).userDetailConnect
     const conversationId = useContext(ConversationContext).conversationId
-   
-
+    const setAppearComponent = useContext(ConversationContext).setAppearComponent
+    const appearComponent = useContext(ConversationContext).appearComponent
+    const userStatus = useContext(UserContext).userStatus
+    const [appear, setAppear] = useState('inline-block')
+    const messageAction = useContext(UserContext).socket
     const [inputAppear, setinputAppear] = useState(false)
+    const [isActive , setIsactive] = useState('none')
+    
+    
+
+
+
+
+
+
+
+
+
 
 
 
@@ -35,7 +52,7 @@ const MessageAndAction = () => {
 
     // array of all message object fetch from data base
     const [messages, setMessages] = useState([])
-    console.log(messages)
+   
 
 
     // arrival message get from socket server
@@ -52,14 +69,46 @@ const MessageAndAction = () => {
         images: [],
 
     })
+    
 
 
 
 
     const scrollRef = useRef()
-    const socket = useRef()
 
-    // get message from server 
+
+    // get message from server
+    useLayoutEffect(() => {
+        if (!appearComponent) {
+            setAppear('inline-block')
+        }
+        else {
+            setAppear('none')
+        }
+
+
+    }, [appearComponent])
+
+
+    // check user is active or not
+    useEffect(() => {
+      userStatus.forEach(element => {
+       
+        if(element.friendId === userDetailConnect._id &&  element.status === 'active'   ){
+            setIsactive('block')
+          
+
+        }
+        
+        
+      });
+
+
+    },[userDetailConnect, userStatus])
+
+
+
+
     useEffect(() => {
         if (conversationId) {
 
@@ -82,14 +131,25 @@ const MessageAndAction = () => {
 
 
     useEffect(() => {
-        socket.current = io("ws://localhost:8900")
-        socket.current.on("getMessage", (data) => {
-            console.log(data)
+
+        messageAction.current.on("getMessage", (data) => {
+          
 
             setArrivalMessage(data)
         })
 
-    },[])
+    }, [])
+    useEffect(() => {
+
+        messageAction.current.emit('addUser', user?.user?._id)
+        messageAction.current.on('getUsers', users => {
+          
+
+        })
+
+
+    }, [messageAction, user])
+
 
     useEffect(() => {
         setMessages(prev => [...prev, arrivalMessage])
@@ -97,16 +157,7 @@ const MessageAndAction = () => {
     }, [arrivalMessage])
 
 
-    useEffect(() => {
 
-        socket.current.emit('addUser', user?.user?._id)
-        socket.current.on('getUsers', users => {
-            console.log(users)
-
-        })
-
-
-    }, [user])
     // fetch message from 
 
     useEffect(() => {
@@ -124,14 +175,15 @@ const MessageAndAction = () => {
 
 
     const handleSendMessage = async () => {
-        await api.createMessage(conversationId, formMessage)
         // send data to socket server 
-        socket.current?.emit("sendMessage", {
+        messageAction.current?.emit("sendMessage", {
             senderId: user?.user?._id,
             receiverId: userDetailConnect?._id,
-            messageData: formMessage
+            messageData: {...formMessage , images : imgList}
         })
         setMessages(prev => [...prev, formMessage])
+        await api.createMessage(conversationId, formMessage)
+
 
 
     }
@@ -143,9 +195,10 @@ const MessageAndAction = () => {
 
                 flexDirection='column'
                 sx={{
-                    width: '60%',
-                    height: 'inherit',
-                    position: 'relative'
+                    width: { lg: '60%', md: '60%', sm: '60%', xs: '100%' },
+                    height: '544px',
+                    position: 'relative',
+                    display: { lg: 'inline-block', md: 'inline-block', sm: 'inline-block', xs: `${appear}` }
 
 
 
@@ -166,14 +219,27 @@ const MessageAndAction = () => {
                     <Stack
                         flexDirection='row'
                         sx={{
-                            marginLeft: '40px'
+                            marginLeft: { lg: '32px', md: '32px', sm: '32px', xs: '0' }
                         }}
 
 
                     >
-                        <Avatar sx={{ width: 32, height: 32, display: 'inline-block' }} src={userDetailConnect.avatarUrl}>
+                        <IconButton sx={{ display: { lg: 'none!important', md: 'none!important', sm: 'none!important', xs: 'inline-block' } }} onClick={() => { setAppearComponent(!appearComponent) }}>
+                            <ArrowBackIcon sx={{ color: '#262626' }} />
+                        </IconButton>
+                        <Box sx={{ position: 'relative' }}>
+                            <Avatar sx={{ width: 40, height: 40, display: 'inline-block', marginTop: '4px' }} src={userDetailConnect.avatarUrl}>
 
-                        </Avatar>
+                            </Avatar>
+
+
+                            {/* 
+                            
+                            status active of user 
+                            
+                            */}
+                            <Box sx={{ display: `${isActive}` }} className='dot-sm'></Box>
+                        </Box>
 
                         <Typography
                             varian='body2'
@@ -222,7 +288,7 @@ const MessageAndAction = () => {
 
 
                 {/* content message */}
-                <Box sx={{ width: '100%', height: '400px', overflow: 'auto' }}>
+                <Box sx={{ width: '100%', height: { lg: '400px', md: '400px', sm: '400px', xs: '400px' }, overflow: 'auto' }}>
                     <Box sx={{ margin: '50px 8px 4px 20px' }}>
                         {/* <ContentMessage />
                         <ContentMessage own={true} />
@@ -238,7 +304,7 @@ const MessageAndAction = () => {
                                 return (
 
                                     <div key={message?.messageId} ref={scrollRef}>
-                                        <ContentMessage refSocket = {socket} messages = { messages} setMessages = {setMessages}  key={message?.messageId} messageData={message} own={own} />
+                                        <ContentMessage refSocket={messageAction} messages={messages} setMessages={setMessages} key={message?.messageId} messageData={message} own={own} />
                                     </div>
 
                                 )
@@ -296,7 +362,7 @@ const MessageAndAction = () => {
 
                                 onChange={(e) => {
 
-                                    setFormMessage({ ...formMessage,createdAt: new Date(), textMessage: e.target.value })
+                                    setFormMessage({ ...formMessage, createdAt: new Date(), textMessage: e.target.value })
                                     setinputAppear(true ? e.target.value !== '' : false)
                                 }}
                                 value={formMessage.textMessage}
@@ -336,8 +402,8 @@ const MessageAndAction = () => {
                                                     return img.base64
                                                 })
 
-                                                setFormMessage({ ...formMessage,createdAt: new Date(), images: imgData })
-
+                                                setFormMessage({ ...formMessage, createdAt: new Date(), images: imgData })
+                                                setImgList(imgData)
 
 
 
@@ -365,8 +431,8 @@ const MessageAndAction = () => {
                         }
                         {
                             true && (
-                                <IconButton onClick={() =>{
-                                    
+                                <IconButton onClick={() => {
+
                                 }}>
                                     <LikeUnactive width={24} height={24} />
                                 </IconButton>

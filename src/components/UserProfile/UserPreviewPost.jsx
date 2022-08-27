@@ -1,6 +1,7 @@
 import { IconButton, ImageList, ImageListItem, ImageListItemBar } from "@mui/material"
 import { useEffect, useRef, useState } from "react"
 import { FaRegComment } from "react-icons/fa"
+import ImageItem from "./ImageItem";
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
     return width
@@ -49,39 +50,7 @@ const UserPreviewPost = ({ currentUserPosts }) => {
                     const rows = 1;
 
                     return (
-                        <ImageListItem sx={{
-                            "&:hover": {
-                                opacity: '0.7'
-                            }
-                        }}
-                         key={item._id} 
-                         cols={cols} 
-                         rows={rows}>
-                            <img
-                                src={item.selectedFile}
-                                alt={item.title}
-                                loading="lazy"
-                            />
-                            <ImageListItemBar
-                                sx={{
-                                    background:
-                                        'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-                                        'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-                                }}
-                                title={item.title}
-                                position="top"
-                                actionIcon={
-                                    <IconButton
-                                        sx={{ color: 'white' }}
-                                        aria-label={`star ${item.title}`}
-                                    >
-                                        <FaRegComment />
-
-                                    </IconButton>
-                                }
-                                actionPosition="left"
-                            />
-                        </ImageListItem>
+                       <ImageItem key = {item._id} item = {item} cols = {cols}  rows = {rows} />
                     );
                 })}
             </ImageList>

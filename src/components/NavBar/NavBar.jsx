@@ -24,6 +24,7 @@ import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
 import Logout from '@mui/icons-material/Logout';
 import Divider from '@mui/material/Divider';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import SearchComponent from './SearchComponent';
 
 
 
@@ -83,7 +84,7 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
                 }} className={classes.toolBar} >
 
                     <Typography variant="h6" className={classes.title} component={Link} to='/' >MeowBook</Typography>
-
+                    <SearchComponent/>
                     <Box className={classes.iconBar}>
                         {/* home icon */}
                         <IconButton component={Link} to='/' onClick={() => {
