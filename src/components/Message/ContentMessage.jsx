@@ -67,7 +67,7 @@ const ModalDeleteMessage = ({ openConfirmDeleteMessage, handleCloseConfirmDelete
     }
     useEffect(() => {
         refSocket.current.on("getDeleteMessage", (data) => {
-            console.log(data)
+           
             const newMessages = messages.filter((message) => {
                 return message?.messageId !== data?.messageId
             })

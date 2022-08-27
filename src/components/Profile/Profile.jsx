@@ -89,7 +89,7 @@ const Profile = ({ user, setUser }) => {
     const currentUserPosts = posts.filter((post) => {
         return post.authorId === user.user._id
     })
-    console.log(currentUserPosts)
+   
 
 
 
