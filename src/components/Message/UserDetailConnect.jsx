@@ -48,7 +48,7 @@ const UserDetailConnect = ({ userId, conversationId, setConversationId }) => {
 
 
     const handleSetConversationId = () => {
-        console.log(userData)
+      
         setConversationId(conversationId)
         setUserDetailConnect(userData)
 
@@ -66,7 +66,7 @@ const UserDetailConnect = ({ userId, conversationId, setConversationId }) => {
         <div>
 
             <Stack onClick={() => {
-                console.log()
+               
                 handleSetConversationId()
                 setAppearComponent(false)
             }} direction='row' className={classes.userBox}>

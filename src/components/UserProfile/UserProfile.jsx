@@ -59,7 +59,7 @@ const UserProfile = ({ currentUser }) => {
                 else {
                     setIsFollow(false)
                 }
-                console.log(isFollow)
+               
 
 
             })
