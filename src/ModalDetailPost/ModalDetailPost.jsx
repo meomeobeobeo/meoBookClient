@@ -46,7 +46,7 @@ const style = {
     left: { lg: '9%', md: '9%', sm: '0%', xs: '0%' },
     transform: 'translate(-50%, -50%)',
     width: { lg: '82%', md: '82%', sm: '100%', xs: '100%' },
-    height: { lg: '88%', md: '88%', sm: '100%', xs: '100vh' },
+    height: { lg: '588px', md: '588px', sm: '100%', xs: '100vh' },
     bgcolor: 'background.paper',
     p: 0,
     borderRadius: '4px',
@@ -140,7 +140,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
                                 sx={{
                                     backgroundColor: '#111',
-                                    width: { lg: '56%', md: '56%', sm: '100%' },
+                                    width: { lg: '56%', md: '56%', sm: '100%' , xs: '100%'},
 
 
                                 }}>
@@ -153,6 +153,10 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                 }}>
                                     <Stack
                                         direction='column'
+                                        sx ={{ 
+                                            width: '100%!important',
+                                            height: '100%!important'
+                                        }}
                                         className={classes.card}
 
 
