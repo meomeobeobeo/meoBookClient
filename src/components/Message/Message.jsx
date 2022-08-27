@@ -94,7 +94,7 @@ const Message = ({ user }) => {
 
 
             </Stack>
-            <Box sx={{ position: 'relative', bottom: '0', width: '100%', marginTop: '50px', display: { lg: 'block', md: 'block', sm: 'block', xs: 'block' } }}>
+            <Box sx={{ position: 'relative', bottom: '0', width: '100%', marginTop: '12px', display: { lg: 'block', md: 'block', sm: 'block', xs: 'block' } }}>
                 <Stack direction='row' spacing={2} justifyContent='center' mt={10} mb={2} >
                     <Box sx={{ width: 24, height: 24, color: 'gray' }}>
                         <Catsvg style={{ width: 24, height: 24 }} />
