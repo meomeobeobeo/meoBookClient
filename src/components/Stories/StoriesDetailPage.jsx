@@ -36,7 +36,7 @@ const Content = ({ action, isPaused }) => {
 const StoriesDetailPage = () => {
     const stories = [
         {
-            url: 'https://meow-book-server.herokuapp.comimage/3800a551-43d4-4860-8387-ad8724191932.jpeg',
+            url: 'https://meo-book-server.herokuapp.comimage/3800a551-43d4-4860-8387-ad8724191932.jpeg',
             duration: 5000,
             header: {
                 heading: 'Mohit Karekar',
@@ -50,7 +50,7 @@ const StoriesDetailPage = () => {
             type: 'video',
         },
         {
-            url: 'https://meow-book-server.herokuapp.comimage/3800a551-43d4-4860-8387-ad8724191932.jpeg',
+            url: 'https://meo-book-server.herokuapp.comimage/3800a551-43d4-4860-8387-ad8724191932.jpeg',
             duration: 5000,
             header: {
                 heading: 'Mohit Karekar',
