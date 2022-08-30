@@ -285,7 +285,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
                                     {/* Emotion and action  */}
 
-                                    <CardActions disableSpacing>
+                                    <CardActions sx = {{zIndex : 90909090}} disableSpacing>
                                         <Box
                                             sx={{
                                                 padding: '4px'
