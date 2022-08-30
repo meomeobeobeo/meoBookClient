@@ -364,7 +364,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
 
                                     {/* textField add comment */}
-                                    <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', margin: '16px 8px', marginBottom: { lg: '16px', md: '16px', sm: '16px', xs: '64px' } }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', margin: '16px 8px', marginBottom: { lg: '16px', md: '16px', sm: '16px', xs: '100px' } }}>
 
                                         <TextField
                                             value={commentData}
