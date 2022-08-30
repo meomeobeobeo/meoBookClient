@@ -285,7 +285,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
                                     {/* Emotion and action  */}
 
-                                    <CardActions sx = {{zIndex : 90909090}} disableSpacing>
+                                    <CardActions  disableSpacing>
                                         <Box
                                             sx={{
                                                 padding: '4px'
@@ -364,7 +364,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
 
                                     {/* textField add comment */}
-                                    <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', margin: '16px 8px', marginBottom: { lg: '16px', md: '16px', sm: '16px', xs: '100px' } }}>
+                                    <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', margin: '16px 8px', marginBottom: { lg: '16px', md: '16px', sm: '16px', xs: '120px' } }}>
 
                                         <TextField
                                             value={commentData}
