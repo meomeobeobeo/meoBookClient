@@ -1,15 +1,17 @@
 .css-1t29gy6-MuiToolbar-root {
-  min-height: 46px;
+    min-height: 46px;
 }
-@media only screen and (max-width:480px) {
-  .css-qhoncr-MuiContainer-root{
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .css-1oqqzyl-MuiContainer-root{
-    padding-left: 4px;
-    padding-right: 4px;
-  }
-  
+
+@media only screen and (max-width: 480px) {
+    .css-qhoncr-MuiContainer-root {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .css-1oqqzyl-MuiContainer-root {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
 }
 

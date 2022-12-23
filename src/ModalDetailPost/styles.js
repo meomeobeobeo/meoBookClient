@@ -1,4 +1,4 @@
-import { makeStyles } from "@mui/styles";
+import {makeStyles} from "@mui/styles";
 
 export default makeStyles((theme) => ({
     img: {
@@ -8,9 +8,7 @@ export default makeStyles((theme) => ({
         height: '100%'
     },
 
-    commentPost: {
-
-    },
+    commentPost: {},
     card: {
         boxShadow: 'none!important',
         border: 'none!important',
@@ -19,7 +17,6 @@ export default makeStyles((theme) => ({
         height: '100%',
 
     }
-
 
 
 }))

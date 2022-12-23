@@ -1,5 +1,5 @@
-import { Avatar, Box, IconButton, Stack, Typography } from '@mui/material'
-import React, { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import {Avatar, Box, IconButton, Stack, Typography} from '@mui/material'
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react'
 import CallIcon from '../../image/CallIcon'
 import Emotion from '../../image/Emotion'
 import ImageIcon from '../../image/ImageIcon'
@@ -8,17 +8,14 @@ import LikeUnactive from '../../image/LikeUnactive'
 import VideoCallIcon from '../../image/VideoCallIcon'
 import ContentMessage from './ContentMessage'
 import useStyles from './styles'
-import { io } from 'socket.io-client'
-import { SocketContext, UserContext } from '../../App'
-import { ConversationContext } from './Message'
+import {UserContext} from '../../App'
+import {ConversationContext} from './Message'
 import * as api from '../../api/index'
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import FileBase64 from '../../FileBase64'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // import FileBase64 from 'react-file-base64'
-
-
 
 
 const MessageAndAction = () => {
@@ -33,26 +30,11 @@ const MessageAndAction = () => {
     const [appear, setAppear] = useState('inline-block')
     const messageAction = useContext(UserContext).socket
     const [inputAppear, setinputAppear] = useState(false)
-    const [isActive , setIsactive] = useState('none')
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
+    const [isActive, setIsactive] = useState('none')
 
 
     // array of all message object fetch from data base
     const [messages, setMessages] = useState([])
-   
 
 
     // arrival message get from socket server
@@ -69,9 +51,6 @@ const MessageAndAction = () => {
         images: [],
 
     })
-    
-
-
 
 
     const scrollRef = useRef()
@@ -81,8 +60,7 @@ const MessageAndAction = () => {
     useLayoutEffect(() => {
         if (!appearComponent) {
             setAppear('inline-block')
-        }
-        else {
+        } else {
             setAppear('none')
         }
 
@@ -92,21 +70,19 @@ const MessageAndAction = () => {
 
     // check user is active or not
     useEffect(() => {
-      userStatus.forEach(element => {
-       
-        if(element.friendId === userDetailConnect._id &&  element.status === 'active'   ){
-            setIsactive('block')
-          
+        userStatus.forEach(element => {
 
-        }
-        
-        
-      });
+            if (element.friendId === userDetailConnect._id && element.status === 'active') {
+                setIsactive('block')
 
 
-    },[userDetailConnect, userStatus])
+            }
 
 
+        });
+
+
+    }, [userDetailConnect, userStatus])
 
 
     useEffect(() => {
@@ -121,19 +97,13 @@ const MessageAndAction = () => {
         }
 
 
-
-
     }, [conversationId])
-
-
-
-
 
 
     useEffect(() => {
 
         messageAction.current.on("getMessage", (data) => {
-          
+
 
             setArrivalMessage(data)
         })
@@ -143,7 +113,7 @@ const MessageAndAction = () => {
 
         messageAction.current.emit('addUser', user?.user?._id)
         messageAction.current.on('getUsers', users => {
-          
+
 
         })
 
@@ -157,21 +127,12 @@ const MessageAndAction = () => {
     }, [arrivalMessage])
 
 
-
-    // fetch message from 
+    // fetch message from
 
     useEffect(() => {
-        scrollRef.current?.scrollIntoView({ behavior: "smooth" })
+        scrollRef.current?.scrollIntoView({behavior: "smooth"})
 
     }, [messages])
-
-
-
-
-
-
-
-
 
 
     const handleSendMessage = async () => {
@@ -179,11 +140,10 @@ const MessageAndAction = () => {
         messageAction.current?.emit("sendMessage", {
             senderId: user?.user?._id,
             receiverId: userDetailConnect?._id,
-            messageData: {...formMessage , images : imgList}
+            messageData: {...formMessage, images: imgList}
         })
         setMessages(prev => [...prev, formMessage])
         await api.createMessage(conversationId, formMessage)
-
 
 
     }
@@ -195,40 +155,46 @@ const MessageAndAction = () => {
 
                 flexDirection='column'
                 sx={{
-                    width: { lg: '60%', md: '60%', sm: '60%', xs: '100%' },
+                    width: {lg: '60%', md: '60%', sm: '60%', xs: '100%'},
                     height: '544px',
                     position: 'relative',
-                    display: { lg: 'inline-block', md: 'inline-block', sm: 'inline-block', xs: `${appear}` }
-
-
-
-
+                    display: {lg: 'inline-block', md: 'inline-block', sm: 'inline-block', xs: `${appear}`}
 
 
                 }}>
                 {/* title */}
                 <Box className={classes.header}
-                    sx={{
+                     sx={{
 
-                        justifyContent: 'space-between!important'
+                         justifyContent: 'space-between!important'
 
-                    }}
+                     }}
 
                 >
                     {/* Avartar Box */}
                     <Stack
                         flexDirection='row'
                         sx={{
-                            marginLeft: { lg: '32px', md: '32px', sm: '32px', xs: '0' }
+                            marginLeft: {lg: '32px', md: '32px', sm: '32px', xs: '0'}
                         }}
 
 
                     >
-                        <IconButton sx={{ display: { lg: 'none!important', md: 'none!important', sm: 'none!important', xs: 'inline-block' } }} onClick={() => { setAppearComponent(!appearComponent) }}>
-                            <ArrowBackIcon sx={{ color: '#262626' }} />
+                        <IconButton sx={{
+                            display: {
+                                lg: 'none!important',
+                                md: 'none!important',
+                                sm: 'none!important',
+                                xs: 'inline-block'
+                            }
+                        }} onClick={() => {
+                            setAppearComponent(!appearComponent)
+                        }}>
+                            <ArrowBackIcon sx={{color: '#262626'}}/>
                         </IconButton>
-                        <Box sx={{ position: 'relative' }}>
-                            <Avatar sx={{ width: 40, height: 40, display: 'inline-block', marginTop: '4px' }} src={userDetailConnect.avatarUrl}>
+                        <Box sx={{position: 'relative'}}>
+                            <Avatar sx={{width: 40, height: 40, display: 'inline-block', marginTop: '4px'}}
+                                    src={userDetailConnect.avatarUrl}>
 
                             </Avatar>
 
@@ -238,7 +204,7 @@ const MessageAndAction = () => {
                             status active of user 
                             
                             */}
-                            <Box sx={{ display: `${isActive}` }} className='dot-sm'></Box>
+                            <Box sx={{display: `${isActive}`}} className='dot-sm'></Box>
                         </Box>
 
                         <Typography
@@ -258,25 +224,23 @@ const MessageAndAction = () => {
                         >{userDetailConnect.name}</Typography>
 
 
-
-
                     </Stack>
 
                     {/* Icon Button call , video call , infor User  */}
                     <Stack direction='row'>
                         {/* call */}
                         <IconButton>
-                            <CallIcon width={24} height={24} />
+                            <CallIcon width={24} height={24}/>
 
                         </IconButton>
                         {/* video call */}
                         <IconButton>
-                            <VideoCallIcon width={24} height={24} />
+                            <VideoCallIcon width={24} height={24}/>
 
                         </IconButton>
                         {/* infor user */}
                         <IconButton>
-                            <InforIcon width={24} height={24} />
+                            <InforIcon width={24} height={24}/>
                         </IconButton>
 
                     </Stack>
@@ -285,11 +249,13 @@ const MessageAndAction = () => {
                 </Box>
 
 
-
-
                 {/* content message */}
-                <Box sx={{ width: '100%', height: { lg: '400px', md: '400px', sm: '400px', xs: '400px' }, overflow: 'auto' }}>
-                    <Box sx={{ margin: '50px 8px 4px 20px' }}>
+                <Box sx={{
+                    width: '100%',
+                    height: {lg: '400px', md: '400px', sm: '400px', xs: '400px'},
+                    overflow: 'auto'
+                }}>
+                    <Box sx={{margin: '50px 8px 4px 20px'}}>
                         {/* <ContentMessage />
                         <ContentMessage own={true} />
                         <ContentMessage />
@@ -300,16 +266,15 @@ const MessageAndAction = () => {
                                 let own = message?.senderId === user?.user?._id
 
 
-
                                 return (
 
                                     <div key={message?.messageId} ref={scrollRef}>
-                                        <ContentMessage refSocket={messageAction} messages={messages} setMessages={setMessages} key={message?.messageId} messageData={message} own={own} />
+                                        <ContentMessage refSocket={messageAction} messages={messages}
+                                                        setMessages={setMessages} key={message?.messageId}
+                                                        messageData={message} own={own}/>
                                     </div>
 
                                 )
-
-
 
 
                             })
@@ -323,17 +288,12 @@ const MessageAndAction = () => {
                 </Box>
 
 
-
-
-
                 {/* input message */}
                 <Stack sx={{
                     position: 'absolute',
                     bottom: '16px',
                     width: '100%',
                     display: 'flex',
-
-
 
 
                 }}>
@@ -354,15 +314,15 @@ const MessageAndAction = () => {
 
                         {/* icon */}
                         <IconButton>
-                            <Emotion width={24} height={24} />
+                            <Emotion width={24} height={24}/>
                         </IconButton>
 
-                        <Box sx={{ width: '80%', marginLeft: '8px' }}>
+                        <Box sx={{width: '80%', marginLeft: '8px'}}>
                             <input
 
                                 onChange={(e) => {
 
-                                    setFormMessage({ ...formMessage, createdAt: new Date(), textMessage: e.target.value })
+                                    setFormMessage({...formMessage, createdAt: new Date(), textMessage: e.target.value})
                                     setinputAppear(true ? e.target.value !== '' : false)
                                 }}
                                 value={formMessage.textMessage}
@@ -383,7 +343,7 @@ const MessageAndAction = () => {
                         {
                             true && (
 
-                                < IconButton        >
+                                < IconButton>
 
 
                                     <label style={{
@@ -393,7 +353,7 @@ const MessageAndAction = () => {
                                     }} htmlFor='message-image'>
 
                                         <FileBase64
-                                            sx={{ display: "none" }}
+                                            sx={{display: "none"}}
                                             id='message-image'
                                             type="file"
                                             multiple={true}
@@ -402,9 +362,8 @@ const MessageAndAction = () => {
                                                     return img.base64
                                                 })
 
-                                                setFormMessage({ ...formMessage, createdAt: new Date(), images: imgData })
+                                                setFormMessage({...formMessage, createdAt: new Date(), images: imgData})
                                                 setImgList(imgData)
-
 
 
                                             }}
@@ -412,19 +371,13 @@ const MessageAndAction = () => {
                                         />
 
 
-                                        <ImageIcon width={24} height={24} />
+                                        <ImageIcon width={24} height={24}/>
 
 
                                     </label>
 
 
-
-
                                 </IconButton>
-
-
-
-
 
 
                             )
@@ -434,7 +387,7 @@ const MessageAndAction = () => {
                                 <IconButton onClick={() => {
 
                                 }}>
-                                    <LikeUnactive width={24} height={24} />
+                                    <LikeUnactive width={24} height={24}/>
                                 </IconButton>
 
                             )
@@ -452,14 +405,13 @@ const MessageAndAction = () => {
                                             images: [],
                                         })
                                         setImgList([])
-                                    }} >
-                                    <Typography variant='body2' fontSize={14} fontWeight={600} color='primary'>Send</Typography>
+                                    }}>
+                                    <Typography variant='body2' fontSize={14} fontWeight={600}
+                                                color='primary'>Send</Typography>
                                 </IconButton>
 
                             )
                         }
-
-
 
 
                     </Box>

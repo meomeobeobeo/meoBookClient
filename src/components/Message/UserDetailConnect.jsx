@@ -1,19 +1,17 @@
-import { Avatar, Box, Stack, Typography } from '@mui/material'
-import React, { useContext, useEffect, useState } from 'react'
+import {Avatar, Box, Stack, Typography} from '@mui/material'
+import React, {useContext, useEffect, useState} from 'react'
 import useStyles from './styles'
 import * as api from '../../api/index'
-import { ConversationContext } from './Message'
-import { UserContext } from '../../App'
+import {ConversationContext} from './Message'
+import {UserContext} from '../../App'
 
 
-const UserDetailConnect = ({ userId, conversationId, setConversationId }) => {
-    const { userDetailConnect, setUserDetailConnect } = useContext(ConversationContext)
+const UserDetailConnect = ({userId, conversationId, setConversationId}) => {
+    const {userDetailConnect, setUserDetailConnect} = useContext(ConversationContext)
     const [userData, setUserData] = useState(null)
     const setAppearComponent = useContext(ConversationContext).setAppearComponent
     const [isActive, setIsactive] = useState('none')
     const userStatus = useContext(UserContext).userStatus
-   
-
 
 
     useEffect(() => {
@@ -25,9 +23,7 @@ const UserDetailConnect = ({ userId, conversationId, setConversationId }) => {
                 return userData.data
 
 
-
             })
-            
 
 
     }, [userId, userStatus])
@@ -44,21 +40,16 @@ const UserDetailConnect = ({ userId, conversationId, setConversationId }) => {
 
         });
 
-    },[userData, userStatus])
+    }, [userData, userStatus])
 
 
     const handleSetConversationId = () => {
-      
+
         setConversationId(conversationId)
         setUserDetailConnect(userData)
 
 
-
     }
-
-
-
-
 
 
     const classes = useStyles()
@@ -66,19 +57,19 @@ const UserDetailConnect = ({ userId, conversationId, setConversationId }) => {
         <div>
 
             <Stack onClick={() => {
-               
+
                 handleSetConversationId()
                 setAppearComponent(false)
             }} direction='row' className={classes.userBox}>
-                <Box sx={{ position: 'relative' }}>
-                    <Avatar src={userData?.avatarUrl} className={classes.nomalAvatar} >
+                <Box sx={{position: 'relative'}}>
+                    <Avatar src={userData?.avatarUrl} className={classes.nomalAvatar}>
 
 
                     </Avatar>
 
                     {/* Status active of user  */}
                     <Box
-                        sx={{ display: `${isActive}` }}
+                        sx={{display: `${isActive}`}}
                         className='dot-nomal'
                     ></Box>
                 </Box>
@@ -86,12 +77,12 @@ const UserDetailConnect = ({ userId, conversationId, setConversationId }) => {
                     <Typography variant='body2' fontSize={16} sx={{
                         marginLeft: '12px',
                         marginTop: '8px'
-                    }} >{userData?.name}</Typography>
-                    <Typography  variant='body2' fontSize={14} sx={{
+                    }}>{userData?.name}</Typography>
+                    <Typography variant='body2' fontSize={14} sx={{
                         marginLeft: '12px',
                         color: '#ccc',
-                        display :`${isActive}`
-                    }} >
+                        display: `${isActive}`
+                    }}>
                         Active Now
                     </Typography>
                 </Stack>

@@ -1,9 +1,9 @@
-import { Box, Typography } from '@mui/material';
-import React, { useEffect } from 'react'
-import Stories, { WithSeeMore } from 'react-insta-stories'
+import {Box, Typography} from '@mui/material';
+import React, {useEffect} from 'react'
+import Stories, {WithSeeMore} from 'react-insta-stories'
 
 
-const CustomStoryContent = ({ story, action }) => {
+const CustomStoryContent = ({story, action}) => {
     return <WithSeeMore story={story} action={action}>
         <div>
             <h1>Hello!</h1>
@@ -11,7 +11,7 @@ const CustomStoryContent = ({ story, action }) => {
         </div>
     </WithSeeMore>
 }
-const Content = ({ action, isPaused }) => {
+const Content = ({action, isPaused}) => {
     useEffect(() => {
         setTimeout(() => {
             action('pause');
@@ -21,16 +21,13 @@ const Content = ({ action, isPaused }) => {
         }, 2000);
     }, []);
     return (
-        <div style={{ background: 'pink', padding: 20 }}>
-            <h1 style={{ marginTop: '100%', marginBottom: 0 }}>🌝</h1>
+        <div style={{background: 'pink', padding: 20}}>
+            <h1 style={{marginTop: '100%', marginBottom: 0}}>🌝</h1>
             <h1>{isPaused ? 'Paused' : 'Playing'}</h1>
         </div>
     );
 
 }
-
-
-
 
 
 const StoriesDetailPage = () => {
@@ -57,13 +54,12 @@ const StoriesDetailPage = () => {
                 subheading: 'Posted 30m ago',
                 profileImage: 'https://picsum.photos/100/100',
             },
-            seeMore: ({ close }) => {
+            seeMore: ({close}) => {
                 return <Box onClick={close}>
                     <Typography variant='body2' color='primary'>Click to close</Typography>
                 </Box>;
             },
         }
-
 
 
     ];
@@ -75,10 +71,10 @@ const StoriesDetailPage = () => {
             justifyContent: 'center',
         }}>
             <Box
-            sx = {{ 
-                width : {lg : "30%" , md : "50%" ,sm :'60%', xs : "100%"},
-            }}
-            
+                sx={{
+                    width: {lg: "30%", md: "50%", sm: '60%', xs: "100%"},
+                }}
+
             >
                 <Stories
                     stories={stories}

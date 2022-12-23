@@ -1,20 +1,19 @@
-import { IconButton, ImageList, ImageListItem, ImageListItemBar } from "@mui/material"
-import { useEffect, useRef, useState } from "react"
-import { FaRegComment } from "react-icons/fa"
+import {ImageList} from "@mui/material"
+import {useEffect, useRef, useState} from "react"
 import ImageItem from "./ImageItem";
+
 function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
+    const {innerWidth: width, innerHeight: height} = window;
     return width
 
 
 }
 
 
-const UserPreviewPost = ({ currentUserPosts }) => {
+const UserPreviewPost = ({currentUserPosts}) => {
     const componentRef = useRef(null)
 
     const [currentWidth, setCurrentWidth] = useState(getWindowDimensions() * 9 / 12)
-
 
 
     useEffect(() => {
@@ -50,7 +49,7 @@ const UserPreviewPost = ({ currentUserPosts }) => {
                     const rows = 1;
 
                     return (
-                       <ImageItem key = {item._id} item = {item} cols = {cols}  rows = {rows} />
+                        <ImageItem key={item._id} item={item} cols={cols} rows={rows}/>
                     );
                 })}
             </ImageList>
@@ -58,7 +57,6 @@ const UserPreviewPost = ({ currentUserPosts }) => {
         </>
     )
 }
-
 
 
 export default UserPreviewPost

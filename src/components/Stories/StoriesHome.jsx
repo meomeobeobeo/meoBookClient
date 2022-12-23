@@ -1,13 +1,9 @@
-import styled from '@emotion/styled';
-import { Avatar, Badge, IconButton, Stack } from '@mui/material'
-import { Box } from '@mui/system';
-import AddIcon from '@mui/icons-material/Add';
+import {Avatar, Badge, Stack} from '@mui/material'
 import React from 'react'
 import FileBase64 from '../../FileBase64';
 
 
-
-const StoriesHome = ({ user }) => {
+const StoriesHome = ({user}) => {
 
     // use use Effect call api to get user follow id 
 
@@ -26,18 +22,18 @@ const StoriesHome = ({ user }) => {
                     height: '100px',
                     marginBottom: '28px',
                     borderRadius: '4px',
-                    overflow :'auto'
+                    overflow: 'auto'
 
 
                 }}>
 
-                <label htmlFor="updateStories" >
+                <label htmlFor="updateStories">
                     <FileBase64
-                        sx={{ display: 'none' }}
+                        sx={{display: 'none'}}
                         id='updateStories'
                         type="file"
                         multiple={false}
-                        onDone={() => { 
+                        onDone={() => {
 
                         }}
 
@@ -61,13 +57,11 @@ const StoriesHome = ({ user }) => {
                         }}
                     >
 
-                        <Avatar sx={{ width: 56, height: 56 }} src={user?.user?.avatarUrl} />
+                        <Avatar sx={{width: 56, height: 56}} src={user?.user?.avatarUrl}/>
 
                     </Badge>
 
                 </label>
-
-
 
 
             </Stack>

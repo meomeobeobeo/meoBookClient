@@ -1,9 +1,8 @@
-import { Backdrop, Fade, Modal, Stack, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import {Backdrop, Fade, Modal, Stack, Typography} from '@mui/material'
+import React, {useState} from 'react'
 import useStyles from './styles'
-import { useDispatch } from 'react-redux'
-import { deleteComment } from '../actions/posts';
-
+import {useDispatch} from 'react-redux'
+import {deleteComment} from '../actions/posts';
 
 
 const styleConfirmDelete = {
@@ -20,17 +19,15 @@ const styleConfirmDelete = {
     textAlign: 'center',
 
 
-
 };
 
-const ModalDeleteComment = ({ openConfirmDeleteComment, handleCloseConfirmDeleteComment, postId, commentId }) => {
+const ModalDeleteComment = ({openConfirmDeleteComment, handleCloseConfirmDeleteComment, postId, commentId}) => {
 
 
     const [mouseDown1, setmouseDown1] = useState(false)
     const [mouseDown2, setmouseDown2] = useState(false)
     const classes = useStyles()
     const dispatch = useDispatch()
-
 
 
     const handleDeleteComment = () => {
@@ -58,32 +55,40 @@ const ModalDeleteComment = ({ openConfirmDeleteComment, handleCloseConfirmDelete
                 }}
             >
                 <Fade in={openConfirmDeleteComment}>
-                    <Stack sx={styleConfirmDelete} direction='column' spacing={2}  >
+                    <Stack sx={styleConfirmDelete} direction='column' spacing={2}>
                         <Stack
                             direction='column'
                             spacing={1}
-                            sx={{ pt: 4 }}
+                            sx={{pt: 4}}
 
                         >
-                            <Typography variant="h6" fontWeight='600' sx={{ color: '#111', fontSize: '18px' }}>Your comment will also delete . </Typography>
-                            <Typography variant='body2' color='gray' >Meo meo</Typography>
-
-
+                            <Typography variant="h6" fontWeight='600' sx={{color: '#111', fontSize: '18px'}}>Your
+                                comment will also delete . </Typography>
+                            <Typography variant='body2' color='gray'>Meo meo</Typography>
 
 
                         </Stack>
-                        <Stack direction="column" spacing={0} justifyContent='space-between'  >
+                        <Stack direction="column" spacing={0} justifyContent='space-between'>
 
 
-
-
-
-                            <Typography color='error' className={mouseDown1 ? classes.pressModal : classes.modal} onMouseUp={() => { setmouseDown1(false) }} onMouseDown={() => { setmouseDown1(true) }} fontWeight='bold' fontSize={14} onClick={() => {
+                            <Typography color='error' className={mouseDown1 ? classes.pressModal : classes.modal}
+                                        onMouseUp={() => {
+                                            setmouseDown1(false)
+                                        }} onMouseDown={() => {
+                                setmouseDown1(true)
+                            }} fontWeight='bold' fontSize={14} onClick={() => {
                                 handleDeleteComment()
                                 handleCloseConfirmDeleteComment()
 
-                            }}          >You sure delete the comment</Typography>
-                            <Typography color='gray' className={mouseDown2 ? classes.pressModal : classes.modal} onMouseUp={() => { setmouseDown2(false) }} onMouseDown={() => { setmouseDown2(true) }} onClick={() => { handleCloseConfirmDeleteComment() }} fontWeight='bold' fontSize={14}>Cancel</Typography>
+                            }}>You sure delete the comment</Typography>
+                            <Typography color='gray' className={mouseDown2 ? classes.pressModal : classes.modal}
+                                        onMouseUp={() => {
+                                            setmouseDown2(false)
+                                        }} onMouseDown={() => {
+                                setmouseDown2(true)
+                            }} onClick={() => {
+                                handleCloseConfirmDeleteComment()
+                            }} fontWeight='bold' fontSize={14}>Cancel</Typography>
 
                         </Stack>
                     </Stack>

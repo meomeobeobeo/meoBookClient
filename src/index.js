@@ -4,28 +4,24 @@ import './index.css';
 import App from './App';
 import {Provider} from 'react-redux'
 import store from './redux/store'
-import {createTheme , ThemeProvider} from '@mui/material'
-import { unstable_createMuiStrictModeTheme } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material'
 
 
 const theme = createTheme({
     //here you set palette, typography ect...
     typography: {
-        "fontFamily":`"apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif";`
-       }
-  })
+        "fontFamily": `"apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif";`
+    }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
-    <Provider store={store} >
-       <ThemeProvider theme={theme}>
+    <Provider store={store}>
+        <ThemeProvider theme={theme}>
             <App/>
-       </ThemeProvider>
-        
+        </ThemeProvider>
+
     </Provider>
-    
-  
 );
 
 

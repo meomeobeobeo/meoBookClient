@@ -1,4 +1,4 @@
-import { makeStyles } from '@mui/styles';
+import {makeStyles} from '@mui/styles';
 
 export default makeStyles(() => ({
     header: {
@@ -25,9 +25,9 @@ export default makeStyles(() => ({
         height: '58px!important',
     },
     ownMessage: {
-      
+
         justifyContent: 'flex-end',
-        
+
 
     },
     ownAvatar: {
@@ -36,30 +36,27 @@ export default makeStyles(() => ({
     ownContent: {
         backgroundColor: '#efefef',
         color: '#111',
-        border : 'none!important',
+        border: 'none!important',
     },
-    ownIcon :{
-        display : 'none!important'
+    ownIcon: {
+        display: 'none!important'
     },
-    ownReverse:{
-        flexDirection :'row-reverse!important'
+    ownReverse: {
+        flexDirection: 'row-reverse!important'
     },
-    modal : {
-        borderTop : '1px solid #ccc',
-        padding :'10px 0px 10px 0px',
-        cursor : 'pointer'
+    modal: {
+        borderTop: '1px solid #ccc',
+        padding: '10px 0px 10px 0px',
+        cursor: 'pointer'
 
     },
-    pressModal : {
-        borderTop : '1px solid #ccc',
-        padding :'10px 0px 10px 0px',
+    pressModal: {
+        borderTop: '1px solid #ccc',
+        padding: '10px 0px 10px 0px',
 
         backgroundColor: '#ccc',
-        cursor : 'pointer'
+        cursor: 'pointer'
     }
-    
-
-
 
 
 }));

@@ -1,8 +1,26 @@
-import react, { useContext, useEffect, useLayoutEffect, useRef } from 'react';
-import { useState } from 'react'
-import { styled } from '@mui/material/styles';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, Avatar, IconButton, Typography, Button, Tooltip, Divider, MenuItem, Menu, Box, TextField, InputAdornment, Stack } from '@mui/material'
-import { purple } from '@mui/material/colors'
+import {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {styled} from '@mui/material/styles';
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
+    CardMedia,
+    Collapse,
+    Divider,
+    IconButton,
+    InputAdornment,
+    Menu,
+    MenuItem,
+    Stack,
+    TextField,
+    Tooltip,
+    Typography
+} from '@mui/material'
+import {purple} from '@mui/material/colors'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ListSubheader from '@mui/material/ListSubheader';
@@ -12,14 +30,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../actions/posts'
+import {useDispatch} from 'react-redux';
+import {addComment, deletePost, likePost} from '../../../actions/posts'
 import useStyles from './styles'
 import FormLog from '../../Form/FormLog';
 import Form from '../../Form/Form';
-import { likePost, addComment } from '../../../actions/posts'
-import { RiMessengerLine, RiUserFollowLine } from 'react-icons/ri'
-import { AiOutlineProfile } from 'react-icons/ai';
+import {RiMessengerLine, RiUserFollowLine} from 'react-icons/ri'
+import {AiOutlineProfile} from 'react-icons/ai';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import SendIcon from '@mui/icons-material/Send';
 import CommentSvg from '../../../image/CommentSvg'
@@ -27,29 +44,19 @@ import SendSvg from '../../../image/SendSvg';
 import LikeUnactive from '../../../image/LikeUnactive';
 import LikeActive from '../../../image/LikeActive';
 import moment from 'moment';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import ModalDetailPost from '../../../ModalDetailPost/ModalDetailPost';
-import { Link, useNavigate } from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import * as api from '../../../api/index'
-import { UserContext } from '../../../App';
-
-
-
-
-
-
-
-
-
+import {UserContext} from '../../../App';
 
 
 const ExpandMore = styled((props) => {
-    const { expand, ...other } = props;
-
+    const {expand, ...other} = props;
 
 
     return <IconButton {...other} />;
-})(({ theme, expand }) => ({
+})(({theme, expand}) => ({
     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
@@ -59,8 +66,7 @@ const ExpandMore = styled((props) => {
 }));
 
 
-
-const Post = ({ post, setCurrentId, currentUserId, user }) => {
+const Post = ({post, setCurrentId, currentUserId, user}) => {
 
 
     /// set expan the user infor option as follow , message , profile page of this user 
@@ -83,29 +89,18 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
     const userStatus = useContext(UserContext).userStatus
 
 
-
     const exactAuthor = user?.user?._id === post.authorId
     const linkToProfile = user && exactAuthor ? `/profile/${user.user._id}` : `/userProfile/${post.authorId}`
     const navigate = useNavigate()
 
 
-
-
-
-
-
-
     // preview data comment
-    const previewComment = [
-
-    ]
+    const previewComment = []
     if (post.comments.length > 10) {
         previewComment.push(post.comments[0])
         previewComment.push(post.comments[1])
 
     }
-
-
 
 
     // check current user like the post
@@ -116,9 +111,6 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
 
     const commentRef = useRef()
     const [openDetailPost, setOpenDetailPost] = useState(false);
-
-    
-
 
 
     // effect user is active
@@ -138,13 +130,6 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
     }, [post.authorId, userStatus, userStatus.length])
 
 
-
-
-
-
-
-
-
     const handleLikePost = async () => {
 
         dispatch(likePost(post._id))
@@ -160,7 +145,6 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                 userId: user?.user?._id,
             }
         }))
-
 
 
     }
@@ -189,13 +173,10 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
             receiverId: post.authorId
         }
 
-        const { data } = await api.createNewConversation(_id, userId)
+        const {data} = await api.createNewConversation(_id, userId)
 
 
     }
-
-
-
 
 
     useEffect(() => {
@@ -221,23 +202,21 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                     avatar={
 
 
-
                         <>
                             <Tooltip title="Information user">
                                 <IconButton
                                     onClick={handleClick}
                                     size="small"
-                                    sx={{ ml: 1 }}
+                                    sx={{ml: 1}}
                                     aria-controls={open ? 'account-menu' : undefined}
                                     aria-haspopup="true"
                                     aria-expanded={open ? 'true' : undefined}
                                 >
-                                    <Box sx={{ position: 'relative' }}>
-
+                                    <Box sx={{position: 'relative'}}>
 
 
                                         <Avatar
-                                            sx={{ bgcolor: purple[500], padding: 0, width: 40, height: 40 }}
+                                            sx={{bgcolor: purple[500], padding: 0, width: 40, height: 40}}
                                             aria-label='recipe'
                                             src={post.authorAvatarUrl}
 
@@ -247,15 +226,13 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                                         </Avatar>
 
 
-
-
-                                        {/* 
+                                        {/*
                             
                             status active of user 
                             
                             */}
-                                        <Box sx={{ display: `${isActive}` }} className='dot-sm'></Box>
-                                   
+                                        <Box sx={{display: `${isActive}`}} className='dot-sm'></Box>
+
                                     </Box>
                                 </IconButton>
                             </Tooltip>
@@ -292,38 +269,38 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                                         },
                                     },
                                 }}
-                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
                                 <MenuItem component={Link} to={linkToProfile} onClick={() => {
 
-                                }} >
+                                }}>
                                     <ListItemIcon>
-                                        <AiOutlineProfile />
+                                        <AiOutlineProfile/>
                                     </ListItemIcon>
                                     <ListItemText>
                                         Profile
                                     </ListItemText>
                                 </MenuItem>
 
-                                <Divider />
+                                <Divider/>
                                 <MenuItem>
                                     <ListItemIcon>
-                                        <RiUserFollowLine />
+                                        <RiUserFollowLine/>
                                     </ListItemIcon>
                                     <ListItemText>
                                         Follow.
                                     </ListItemText>
                                 </MenuItem>
-                                <MenuItem  onClick={() => {
+                                <MenuItem onClick={() => {
                                     if (post.authorId !== user?.user?._id) {
                                         handleCreateConversation()
-                                        navigate('/message',{ replace: true})
+                                        navigate('/message', {replace: true})
                                     }
-                                    
-                                }} >
+
+                                }}>
                                     <ListItemIcon>
-                                        <RiMessengerLine />
+                                        <RiMessengerLine/>
                                     </ListItemIcon>
                                     Message
                                 </MenuItem>
@@ -331,12 +308,6 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                             </Menu>
 
                         </>
-
-
-
-
-
-
 
 
                     }
@@ -352,7 +323,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
 
 
                             >
-                                <MoreVertIcon />
+                                <MoreVertIcon/>
 
                             </IconButton>
 
@@ -361,7 +332,11 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                     }
                     title={
 
-                        <Typography variant='body2' fontWeight={600} sx={{ color: '#262626', display: 'inline-block', paddingRight: '8px' }}>{post.name}</Typography>
+                        <Typography variant='body2' fontWeight={600} sx={{
+                            color: '#262626',
+                            display: 'inline-block',
+                            paddingRight: '8px'
+                        }}>{post.name}</Typography>
 
                     }
                     subheader={moment(post.createdAt).fromNow()}
@@ -370,7 +345,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                 {/* list choose with your post */}
                 <Collapse in={moreOption} timeout='auto' unmountOnExit>
                     <List
-                        sx={{ width: '100%', bgcolor: 'background.paper' }}
+                        sx={{width: '100%', bgcolor: 'background.paper'}}
                         component="nav"
                         aria-labelledby="nested-list-subheader"
                         subheader={
@@ -387,23 +362,21 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
 
                             }}>
                             <ListItemIcon>
-                                <ModeEditIcon />
+                                <ModeEditIcon/>
                             </ListItemIcon>
-                            <ListItemText primary='Edit post' />
+                            <ListItemText primary='Edit post'/>
                         </ListItemButton>
 
                         <ListItemButton
                             disabled={disabled}
-                            onClick={handleDeletePost} >
+                            onClick={handleDeletePost}>
 
                             <ListItemIcon>
-                                <DeleteOutlineIcon />
+                                <DeleteOutlineIcon/>
                             </ListItemIcon>
 
-                            <ListItemText primary='Delete post' />
+                            <ListItemText primary='Delete post'/>
                         </ListItemButton>
-
-
 
 
                     </List>
@@ -430,9 +403,9 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                             setLikeAction(!likeAction)
 
                         }}
-                        aria-label="add to favorite " >
-                        {likeAction ? <LikeActive width='24px' height='24px' /> : <LikeUnactive width='24px' height='24px' />}
-
+                        aria-label="add to favorite ">
+                        {likeAction ? <LikeActive width='24px' height='24px'/> :
+                            <LikeUnactive width='24px' height='24px'/>}
 
 
                     </IconButton>
@@ -445,15 +418,15 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                     
                     
                     */}
-                    <IconButton aria-label='comment' sx={{ marginLeft: '4px' }} onClick={() => {
+                    <IconButton aria-label='comment' sx={{marginLeft: '4px'}} onClick={() => {
                         setOpenDetailPost(true)
 
 
-                    }}  >
-                        <CommentSvg width='24px' height='24px' />
+                    }}>
+                        <CommentSvg width='24px' height='24px'/>
                     </IconButton>
-                    <IconButton aria-label='send' sx={{ marginLeft: '4px' }} >
-                        <SendSvg width='24px' height='24px' />
+                    <IconButton aria-label='send' sx={{marginLeft: '4px'}}>
+                        <SendSvg width='24px' height='24px'/>
                     </IconButton>
 
                     <ExpandMore
@@ -461,8 +434,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                         onClick={handleExpanded}
                         aria-expanded={expanded}
                         aria-label="show more">
-                        <ExpandMoreIcon />
-
+                        <ExpandMoreIcon/>
 
 
                     </ExpandMore>
@@ -470,14 +442,21 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
 
                 </CardActions>
                 <Stack direction='column' ml={2} spacing={1}>
-                    <Typography variant='body2' fontWeight={600} sx={{ color: '#262626' }}>{post.likes.length} likes</Typography>
+                    <Typography variant='body2' fontWeight={600}
+                                sx={{color: '#262626'}}>{post.likes.length} likes</Typography>
                     <Box>
 
-                        <Typography variant='body2' fontWeight={600} sx={{ color: '#262626', display: 'inline-block', paddingRight: '8px' }}>{post.name}</Typography>
-                        <Typography variant='body2' fontWeight={400} sx={{ color: 'gray', display: 'inline-block' }}>{post.message}</Typography>
+                        <Typography variant='body2' fontWeight={600} sx={{
+                            color: '#262626',
+                            display: 'inline-block',
+                            paddingRight: '8px'
+                        }}>{post.name}</Typography>
+                        <Typography variant='body2' fontWeight={400}
+                                    sx={{color: 'gray', display: 'inline-block'}}>{post.message}</Typography>
                     </Box>
 
-                    <Typography variant='body2' fontWeight={400} sx={{ color: 'gray' }}>{`View all ${post.comments.length} comments`}</Typography>
+                    <Typography variant='body2' fontWeight={400}
+                                sx={{color: 'gray'}}>{`View all ${post.comments.length} comments`}</Typography>
                     <Box>
                         {
                             post.comments.length > 10 && (
@@ -485,24 +464,27 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                                 previewComment.map(comment =>
                                     <Box key={comment.commentId}>
 
-                                        <Typography variant='body2' fontWeight={600} sx={{ color: '#262626', display: 'inline-block', paddingRight: '8px' }}>{comment.name}</Typography>
-                                        <Typography variant='body2' fontWeight={400} sx={{ color: 'gray', display: 'inline-block' }}>{comment.content}</Typography>
+                                        <Typography variant='body2' fontWeight={600} sx={{
+                                            color: '#262626',
+                                            display: 'inline-block',
+                                            paddingRight: '8px'
+                                        }}>{comment.name}</Typography>
+                                        <Typography variant='body2' fontWeight={400} sx={{
+                                            color: 'gray',
+                                            display: 'inline-block'
+                                        }}>{comment.content}</Typography>
                                         <br></br>
 
                                     </Box>
-
                                 )
 
                             )
 
 
-
-
-
                         }
                     </Box>
                 </Stack>
-                <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', margin: '16px 8px' }}>
+                <Box sx={{display: 'flex', alignItems: 'flex-end', width: '100%', margin: '16px 8px'}}>
 
                     <TextField
                         value={commentData}
@@ -512,12 +494,12 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <AccountCircle />
+                                    <AccountCircle/>
                                 </InputAdornment>
                             ),
                         }}
                         variant="standard"
-                        sx={{ width: '80%' }}
+                        sx={{width: '80%'}}
                         onChange={handleChangeInputComment}
                     />
                     <Button
@@ -534,7 +516,7 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                             margin: '8px 8px -8px 8px',
 
                         }}
-                        endIcon={<SendIcon />}>
+                        endIcon={<SendIcon/>}>
                         Post
                     </Button>
                 </Box>
@@ -549,7 +531,6 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                 </Collapse>
 
 
-
             </Card>
 
             {/* Log Edit the post */}
@@ -559,13 +540,14 @@ const Post = ({ post, setCurrentId, currentUserId, user }) => {
                 setOpenPopup={setOpenPopup}
 
             >
-                <Form currentId={post._id} setCurrentId={setCurrentId} setOpenPopup={setOpenPopup} openPopup={openPopup} />
+                <Form currentId={post._id} setCurrentId={setCurrentId} setOpenPopup={setOpenPopup}
+                      openPopup={openPopup}/>
             </FormLog>
 
             {/* Open modal detail Post  */}
-            <ModalDetailPost key={post._id} likeAction={likeAction} setLikeAction={setLikeAction} openDetailPost={openDetailPost} setOpenDetailPost={setOpenDetailPost} post={post} user={user} />
-
-
+            <ModalDetailPost key={post._id} likeAction={likeAction} setLikeAction={setLikeAction}
+                             openDetailPost={openDetailPost} setOpenDetailPost={setOpenDetailPost} post={post}
+                             user={user}/>
 
 
         </>

@@ -1,38 +1,33 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Avatar, Card, CardActions, CardContent, CardHeader, CardMedia, Grow, IconButton, InputAdornment, Paper, Stack, TextField } from '@mui/material';
+import {Avatar, CardActions, Grow, IconButton, InputAdornment, Stack, TextField} from '@mui/material';
 import useStyles from './styles'
-import { useRef } from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux'
-import { addComment, likePost } from '../actions/posts'
-import { v4 as uuidv4 } from 'uuid'
+import {useDispatch} from 'react-redux'
+import {addComment, likePost} from '../actions/posts'
+import {v4 as uuidv4} from 'uuid'
 import Emotion from '../image/Emotion';
 import SendIcon from '@mui/icons-material/Send';
-import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 import Comment from '../commentBox/Comment';
 import SendSvg from '../image/SendSvg';
 import CommentSvg from '../image/CommentSvg';
 import BookMarkIcon from '../image/BookMarkIcon';
 import LikeActive from '../image/LikeActive';
 import LikeUnactive from '../image/LikeUnactive';
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import BookMarkFill from '../image/BookMarkFill';
 import moment from 'moment';
 
 const BookMark = styled((props) => {
-    const { expand, ...other } = props;
-
+    const {expand, ...other} = props;
 
 
     return <IconButton {...other} />;
-})(({ theme, expand }) => ({
+})(({theme, expand}) => ({
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
         duration: theme.transitions.duration.shortest,
@@ -42,11 +37,11 @@ const BookMark = styled((props) => {
 
 const style = {
     position: 'absolute',
-    top: { lg: '3%', md: '3%', sm: '0%', xs: '0%' },
-    left: { lg: '9%', md: '9%', sm: '0%', xs: '0%' },
+    top: {lg: '3%', md: '3%', sm: '0%', xs: '0%'},
+    left: {lg: '9%', md: '9%', sm: '0%', xs: '0%'},
     transform: 'translate(-50%, -50%)',
-    width: { lg: '82%', md: '82%', sm: '100%', xs: '100%' },
-    height: { lg: '588px', md: '588px', sm: '100%', xs: '100vh' },
+    width: {lg: '82%', md: '82%', sm: '100%', xs: '100%'},
+    height: {lg: '588px', md: '588px', sm: '100%', xs: '100vh'},
     bgcolor: 'background.paper',
     p: 0,
     borderRadius: '4px',
@@ -54,7 +49,7 @@ const style = {
     overflowX: "hidden",
 };
 
-const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAction, setLikeAction }) => {
+const ModalDetailPost = ({openDetailPost, setOpenDetailPost, post, user, likeAction, setLikeAction}) => {
 
     const dispatch = useDispatch()
     const [commentData, setCommentData] = useState('')
@@ -65,11 +60,6 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
         setExpanded(!expanded)
 
     }
-
-
-
-
-
 
 
     const handleLikePost = async () => {
@@ -102,12 +92,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
         }))
 
 
-
     }
-
-
-
-
 
 
     return (
@@ -122,13 +107,11 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                 BackdropProps={{
                     timeout: 500,
                 }}
-                sx={{
-
-                }}
+                sx={{}}
             >
                 <Grow
-                    style={{ transformOrigin: '50% 50%' }}
-                    {...(openDetailPost ? { timeout: 200 } : {})}
+                    style={{transformOrigin: '50% 50%'}}
+                    {...(openDetailPost ? {timeout: 200} : {})}
                     in={openDetailPost}>
                     <Box sx={style}>
                         <Stack direction='row' sx={{
@@ -140,7 +123,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
                                 sx={{
                                     backgroundColor: '#111',
-                                    width: { lg: '56%', md: '56%', sm: '100%' , xs: '100%'},
+                                    width: {lg: '56%', md: '56%', sm: '100%', xs: '100%'},
 
 
                                 }}>
@@ -153,7 +136,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                 }}>
                                     <Stack
                                         direction='column'
-                                        sx ={{ 
+                                        sx={{
                                             width: '100%!important',
                                             height: '100%!important'
                                         }}
@@ -166,24 +149,20 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                                 boxShadow: 'none',
                                                 width: '100%',
                                                 height: '32px',
-                                                display: { xs: 'block', sm: 'block', md: 'none', lg: 'none' },
+                                                display: {xs: 'block', sm: 'block', md: 'none', lg: 'none'},
                                                 borderBottom: '1px solid #ccc',
                                                 backgroundColor: '#ccc',
                                                 padding: 1,
-
 
 
                                             }}
                                             onClick={handleClose}
 
 
-
-
-
-
                                         >
-                                            <IconButton aria-label="settings"  >
-                                                <Typography variant='body2' fontWeight='600' color='primary'>Exit</Typography>
+                                            <IconButton aria-label="settings">
+                                                <Typography variant='body2' fontWeight='600'
+                                                            color='primary'>Exit</Typography>
                                             </IconButton>
                                         </Box>
 
@@ -200,23 +179,21 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                         ></CardMedia> */}
                                         <Box sx={{
                                             width: '100%',
-                                            height: { lg: '532px', md: '532px', sm: '532px', xs: '240px' },
+                                            height: {lg: '532px', md: '532px', sm: '532px', xs: '240px'},
                                             marginTop: '28px',
                                             marginBottom: '28px',
                                         }}>
                                             <img src={post.selectedFile}
-                                                alt="meomeo"
-                                                style={{
-                                                    width: '100%',
-                                                    height: '100%',
-                                                    objectFit: 'cover'
-                                                }} />
+                                                 alt="meomeo"
+                                                 style={{
+                                                     width: '100%',
+                                                     height: '100%',
+                                                     objectFit: 'cover'
+                                                 }}/>
 
                                         </Box>
                                     </Stack>
                                 </Box>
-
-
 
 
                             </Box>
@@ -224,7 +201,7 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                             {/* comment  */}
                             <Box
                                 sx={{
-                                    width: { lg: '44%', md: '44%', xs: '100%' },
+                                    width: {lg: '44%', md: '44%', xs: '100%'},
                                 }}
                             >
 
@@ -244,28 +221,30 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                             justifyContent: 'flex-start',
                                             alignItems: 'center',
                                             borderBottom: '1px solid #ccc',
-                                            display: { lg: 'flex', md: 'flex', sm: 'flex', xs: 'none' }
+                                            display: {lg: 'flex', md: 'flex', sm: 'flex', xs: 'none'}
 
                                         }}
 
 
-
-
-
                                     >
 
-                                        <Stack direction='row' sx={{ marginLeft: '12px' }} spacing={2} >
-                                            <Avatar src={user?.user?.avatarUrl} sx={{ width: 24, height: 24 }} aria-label="recipe">
+                                        <Stack direction='row' sx={{marginLeft: '12px'}} spacing={2}>
+                                            <Avatar src={user?.user?.avatarUrl} sx={{width: 24, height: 24}}
+                                                    aria-label="recipe">
 
                                             </Avatar>
-                                            <Typography variant='body2' fontWeight={600} sx={{ color: '#262626', display: 'inline-block', paddingRight: '8px' }}>{user?.user?.name}</Typography>
+                                            <Typography variant='body2' fontWeight={600} sx={{
+                                                color: '#262626',
+                                                display: 'inline-block',
+                                                paddingRight: '8px'
+                                            }}>{user?.user?.name}</Typography>
                                         </Stack>
 
                                         <Box sx={{
                                             position: 'absolute',
                                             right: '12px',
                                         }} aria-label="settings">
-                                            <MoreVertIcon />
+                                            <MoreVertIcon/>
                                         </Box>
 
                                     </Box>
@@ -280,12 +259,9 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                     ></Comment>
 
 
-
-
-
                                     {/* Emotion and action  */}
 
-                                    <CardActions  disableSpacing>
+                                    <CardActions disableSpacing>
                                         <Box
                                             sx={{
                                                 padding: '4px'
@@ -295,9 +271,9 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                                 setLikeAction(!likeAction)
 
                                             }}
-                                            aria-label="add to favorite " >
-                                            {likeAction ? <LikeActive width='24px' height='24px' /> : <LikeUnactive width='24px' height='24px' />}
-
+                                            aria-label="add to favorite ">
+                                            {likeAction ? <LikeActive width='24px' height='24px'/> :
+                                                <LikeUnactive width='24px' height='24px'/>}
 
 
                                         </Box>
@@ -310,15 +286,16 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                     
                     
                                             */}
-                                        <Box aria-label='comment' sx={{ marginLeft: '4px', padding: '4px' }} onClick={() => {
-                                            setOpenDetailPost(true)
+                                        <Box aria-label='comment' sx={{marginLeft: '4px', padding: '4px'}}
+                                             onClick={() => {
+                                                 setOpenDetailPost(true)
 
 
-                                        }}  >
-                                            <CommentSvg width='24px' height='24px' />
+                                             }}>
+                                            <CommentSvg width='24px' height='24px'/>
                                         </Box>
-                                        <Box aria-label='send' sx={{ marginLeft: '4px', padding: '4px' }} >
-                                            <SendSvg width='24px' height='24px' />
+                                        <Box aria-label='send' sx={{marginLeft: '4px', padding: '4px'}}>
+                                            <SendSvg width='24px' height='24px'/>
                                         </Box>
 
                                         <BookMark
@@ -329,18 +306,13 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
 
                                             {
-                                                expanded ? <BookMarkFill width={24} height={24} /> : <BookMarkIcon width={24} height={24} />
+                                                expanded ? <BookMarkFill width={24} height={24}/> :
+                                                    <BookMarkIcon width={24} height={24}/>
 
                                             }
 
 
-
-
-
-
-
                                         </BookMark>
-
 
 
                                     </CardActions>
@@ -348,23 +320,31 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
 
                                         {
                                             post.likes.length === 0 ? (
-                                                <Typography variant='body2' fontWeight={600} sx={{ color: '#262626' }}>Be the first like this.</Typography>
+                                                <Typography variant='body2' fontWeight={600} sx={{color: '#262626'}}>Be
+                                                    the first like this.</Typography>
 
                                             ) : (
-                                                <Typography variant='body2' fontWeight={600} sx={{ color: '#262626' }}>{post.likes.length} likes</Typography>
+                                                <Typography variant='body2' fontWeight={600}
+                                                            sx={{color: '#262626'}}>{post.likes.length} likes</Typography>
 
                                             )
 
                                         }
-                                        <Typography variant='body2' fontWeight={400} color='gray'>{moment(post.createdAt).calendar()}</Typography>
-
+                                        <Typography variant='body2' fontWeight={400}
+                                                    color='gray'>{moment(post.createdAt).calendar()}</Typography>
 
 
                                     </Stack>
 
 
                                     {/* textField add comment */}
-                                    <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '100%', margin: '16px 8px', marginBottom: { lg: '16px', md: '16px', sm: '16px', xs: '128px' } }}>
+                                    <Box sx={{
+                                        display: 'flex',
+                                        alignItems: 'flex-end',
+                                        width: '100%',
+                                        margin: '16px 8px',
+                                        marginBottom: {lg: '16px', md: '16px', sm: '16px', xs: '128px'}
+                                    }}>
 
                                         <TextField
                                             value={commentData}
@@ -373,12 +353,12 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                             InputProps={{
                                                 startAdornment: (
                                                     <InputAdornment position="start">
-                                                        <Emotion width={24} height={24} />
+                                                        <Emotion width={24} height={24}/>
                                                     </InputAdornment>
                                                 ),
                                             }}
                                             variant="standard"
-                                            sx={{ width: '85%' }}
+                                            sx={{width: '85%'}}
                                             onChange={handleChangeInputComment}
                                         />
                                         <Button
@@ -395,13 +375,10 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                                                 margin: '8px 8px -8px 8px',
 
                                             }}
-                                            endIcon={<SendIcon />}>
+                                            endIcon={<SendIcon/>}>
                                             Post
                                         </Button>
                                     </Box>
-
-
-
 
 
                                 </Stack>
@@ -409,15 +386,12 @@ const ModalDetailPost = ({ openDetailPost, setOpenDetailPost, post, user, likeAc
                             </Box>
 
 
-
                         </Stack>
-
 
 
                     </Box>
                 </Grow>
             </Modal>
-
 
 
         </>

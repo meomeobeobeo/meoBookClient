@@ -1,45 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit"
+import {createSlice} from "@reduxjs/toolkit"
 import * as action from "../actions/posts"
+
 export const postsSlice = createSlice({
     name: 'posts',
     initialState: {
         status: 'idle',
         posts: []
     },
-    reducers: {
-        //     getPosts : (state , action )=>{
-
-        //         state.posts = action.payload
-
-
-
-        //     },
-        //     createPost : (state , action )=>{
-        //         state.posts.push(action.payload)
-        //     },
-        //     editPost : (state ,action) => {
-        //         let currentPost = state.posts.find((post)=>{
-
-        //             return post.id === action.payload._id
-
-        //         }) 
-        //         if(currentPost){
-
-        //             currentPost = action.payload.data
-        //         }
-
-        //     },
-        // deletePost :(state , action) =>{
-        //     state.posts.filter((post)=>{
-        //         return post._id !== action.payload
-        //     })
-
-        // }
-
-
-    },
-
-
+    reducers: {},
 
 
     extraReducers: (builder) => {
@@ -49,7 +17,7 @@ export const postsSlice = createSlice({
             })
             .addCase(action.getPosts.fulfilled, (state, action) => {
                 state.status = 'success'
-             
+
                 state.posts = action.payload;
             })
             .addCase(action.createPost.pending, (state, action) => {
@@ -63,7 +31,7 @@ export const postsSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(action.editPost.fulfilled, (state, action) => {
-               
+
                 state.status = 'success'
                 state.posts = state.posts.map((post) => (post._id === action.payload._id ? action.payload : post));
 
@@ -119,7 +87,6 @@ export const postsSlice = createSlice({
                 state.posts = state.posts.map((post) => (post._id === action.payload._id ? currentPost : post));
 
 
-
             })
             .addCase(action.deleteComment.pending, (state, action) => {
                 state.status = 'loading'
@@ -135,13 +102,10 @@ export const postsSlice = createSlice({
                 state.posts = state.posts.map((post) => (post._id === action.payload._id ? newPost : post));
 
 
-
             })
 
 
-
     }
-
 
 
 })

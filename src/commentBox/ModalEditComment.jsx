@@ -1,10 +1,8 @@
-import { Button, Modal, TextField } from '@mui/material';
-import { Box } from '@mui/system';
-import React, { useState } from 'react'
-import { useDispatch  } from 'react-redux'
-import { editComment } from '../actions/posts';
-
-
+import {Button, Modal, TextField} from '@mui/material';
+import {Box} from '@mui/system';
+import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {editComment} from '../actions/posts';
 
 
 const style = {
@@ -16,22 +14,26 @@ const style = {
     bgcolor: 'background.paper',
     border: 'none',
     p: 4,
-    display : 'flex',
+    display: 'flex',
     flexDirection: 'row',
 };
 
-const ModalEditComment = ({ openModalEditComment, handleCloseModalEditComment, lastComment, postId ,user , commentId }) => {
+const ModalEditComment = ({
+                              openModalEditComment,
+                              handleCloseModalEditComment,
+                              lastComment,
+                              postId,
+                              user,
+                              commentId
+                          }) => {
 
-
-    
 
     const dispatch = useDispatch()
     const [content, setContent] = useState('')
-    
-   
-   
+
+
     const handleEditComment = async () => {
-       
+
         dispatch(editComment({
 
             _id: postId,
@@ -43,16 +45,12 @@ const ModalEditComment = ({ openModalEditComment, handleCloseModalEditComment, l
                 content: content,
                 commentId: commentId,
                 userId: lastComment.userId,
- 
+
             }
         }))
 
 
-
     }
-
-
-
 
 
     return (
@@ -64,15 +62,15 @@ const ModalEditComment = ({ openModalEditComment, handleCloseModalEditComment, l
                 aria-labelledby="keep-mounted-modal-title"
                 aria-describedby="keep-mounted-modal-description"
             >
-                <Box sx={style} >
+                <Box sx={style}>
                     <TextField
                         id="standard-multiline-static"
                         multiline
                         rows={2}
                         placeholder='Edit your comment'
                         variant="standard"
-                        sx= {{
-                            width:'100%'
+                        sx={{
+                            width: '100%'
                         }}
                         value={content}
 
@@ -87,10 +85,10 @@ const ModalEditComment = ({ openModalEditComment, handleCloseModalEditComment, l
                             (e) => {
 
                                 handleEditComment()
-                               
+
                                 setContent('');
                                 handleCloseModalEditComment()
-                                
+
 
                             }
                         }
@@ -105,13 +103,9 @@ const ModalEditComment = ({ openModalEditComment, handleCloseModalEditComment, l
                     </Button>
 
 
-
-
-
                 </Box>
 
             </Modal>
-
 
 
         </>

@@ -1,14 +1,13 @@
-import { Box, IconButton, Typography } from '@mui/material'
-import React, { useContext, useLayoutEffect, useState } from 'react'
+import {Box, IconButton, Typography} from '@mui/material'
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react'
 import WriteIcon from '../../image/WriteIcon'
 import UserList from './UserList'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import useStyles from './styles'
-import { UserContext } from '../../App';
-import { useEffect } from 'react';
+import {UserContext} from '../../App';
 import * as api from '../../api/index'
 import StartIcon from '@mui/icons-material/Start';
-import { ConversationContext } from './Message';
+import {ConversationContext} from './Message';
 
 const UserInfor = () => {
 
@@ -51,13 +50,11 @@ const UserInfor = () => {
             })
 
 
-
     }, [user])
     useLayoutEffect(() => {
         if (appearComponent) {
             setAppear('inline-block')
-        }
-        else {
+        } else {
             setAppear('none')
         }
 
@@ -65,24 +62,14 @@ const UserInfor = () => {
     }, [appearComponent])
 
 
-
-
-
-
-
-
-
-
-
     return (
         <>
             <Box
                 sx={{
-                    width: { lg: '40%', md: '40%', sm: '40%', xs: '100%' },
+                    width: {lg: '40%', md: '40%', sm: '40%', xs: '100%'},
                     borderRight: '1px solid #ccc',
                     height: 'inherit',
-                    display: { lg: 'inline-block', md: 'inline-block', sm: 'inline-block', xs: `${appear}` }
-
+                    display: {lg: 'inline-block', md: 'inline-block', sm: 'inline-block', xs: `${appear}`}
 
 
                 }}
@@ -100,12 +87,11 @@ const UserInfor = () => {
                         alignContent: 'center',
 
 
-
                     }}>
                         <Typography varian="body2" fontWeight={600} sx={{
                             color: '#262626', display: 'inline-block', fontSize: '16px',
                         }}>{user?.user?.name}</Typography>
-                        <ExpandMoreIcon />
+                        <ExpandMoreIcon/>
 
 
                     </Box>
@@ -118,11 +104,20 @@ const UserInfor = () => {
                         }}
                     >
                         <IconButton>
-                            <WriteIcon width={24} height={24} />
+                            <WriteIcon width={24} height={24}/>
                         </IconButton>
-                       
-                        <IconButton sx={{ display: { lg: 'none!important', md: 'none!important', sm: 'none!important', xs: 'inline-block' }}} onClick={() => { setAppearComponent(false) }}>
-                            <StartIcon sx={{ color: '#262626' }} />
+
+                        <IconButton sx={{
+                            display: {
+                                lg: 'none!important',
+                                md: 'none!important',
+                                sm: 'none!important',
+                                xs: 'inline-block'
+                            }
+                        }} onClick={() => {
+                            setAppearComponent(false)
+                        }}>
+                            <StartIcon sx={{color: '#262626'}}/>
                         </IconButton>
 
 
@@ -131,16 +126,12 @@ const UserInfor = () => {
                 </Box>
 
                 {/* User List component */}
-                <UserList senderList={senderList} />
+                <UserList senderList={senderList}/>
 
                 {/*  senderList return {
                         personId : person,
                         conversationId : conversation._id
                     } */}
-
-
-
-
 
 
             </Box>

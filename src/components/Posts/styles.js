@@ -1,7 +1,6 @@
-import { makeStyles } from "@mui/styles";
-export default makeStyles(()=>({
-   posts:{
-       
-   }
+import {makeStyles} from "@mui/styles";
+
+export default makeStyles(() => ({
+    posts: {}
 
 }))

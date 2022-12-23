@@ -1,11 +1,10 @@
-import { Avatar, Box, ClickAwayListener, Paper, Stack, Typography } from '@mui/material'
-import React, { useContext, useEffect, useState } from 'react'
-import SearchIcon from '@mui/icons-material/Search';
+import {Avatar, Box, ClickAwayListener, Paper, Stack, Typography} from '@mui/material'
+import React, {useContext, useEffect, useState} from 'react'
 import * as api from '../../api/index'
-import { UserContext } from '../../App';
-import { Link } from 'react-router-dom';
+import {UserContext} from '../../App';
+import {Link} from 'react-router-dom';
 
-const SearchResults = ({ searchText , setOpen }) => {
+const SearchResults = ({searchText, setOpen}) => {
     const currentUser = useContext(UserContext).user
     const [userResults, setUserResults] = useState([])
 
@@ -20,7 +19,6 @@ const SearchResults = ({ searchText , setOpen }) => {
             })
 
 
-
     }, [searchText])
 
 
@@ -33,7 +31,6 @@ const SearchResults = ({ searchText , setOpen }) => {
                 width: '360px',
                 height: '360px',
                 overflow: 'auto',
-               
 
 
                 zIndex: 10000000,
@@ -60,15 +57,17 @@ const SearchResults = ({ searchText , setOpen }) => {
 
             }}
         >
-            <Stack direction='column' sx={{ width: '100%', height: 'auto', marginTop: '16px' }}>
+            <Stack direction='column' sx={{width: '100%', height: 'auto', marginTop: '16px'}}>
                 {
                     userResults.map((user, index) => {
                         let linkToProfile = currentUser?.user?._id === user?._id ? `/profile/${currentUser?.user._id}` : `/userProfile/${user?._id}`
 
                         return (
                             <Stack
-                                key = {user._id}
-                                onClick = {()=>{setOpen(false)}}
+                                key={user._id}
+                                onClick={() => {
+                                    setOpen(false)
+                                }}
                                 component={Link}
                                 to={`${linkToProfile}`}
 
@@ -82,13 +81,17 @@ const SearchResults = ({ searchText , setOpen }) => {
                                     textDecoration: 'none'
                                 }}
                                 spacing={1}
-                               
+
 
                             >
-                                <Avatar src={user?.avatarUrl} sx={{ width: 24, height: 24 }} aria-label="recipe">
+                                <Avatar src={user?.avatarUrl} sx={{width: 24, height: 24}} aria-label="recipe">
 
                                 </Avatar>
-                                <Typography variant='body2' fontWeight={600} sx={{ color: '#262626', display: 'inline-block', paddingRight: '8px' }}>{user?.name}</Typography>
+                                <Typography variant='body2' fontWeight={600} sx={{
+                                    color: '#262626',
+                                    display: 'inline-block',
+                                    paddingRight: '8px'
+                                }}>{user?.name}</Typography>
                             </Stack>
                         )
 
@@ -102,11 +105,9 @@ const SearchResults = ({ searchText , setOpen }) => {
     )
 
 
-
-
 }
 
-const SearchComponent = ({ sx }) => {
+const SearchComponent = ({sx}) => {
     const [searchText, setSearchText] = useState('')
 
     const [open, setOpen] = React.useState(false);
@@ -120,10 +121,10 @@ const SearchComponent = ({ sx }) => {
     };
 
     return (
-        <ClickAwayListener onClickAway={handleClickAway} >
+        <ClickAwayListener onClickAway={handleClickAway}>
             <Box
                 className='search-component'
-                sx={{ position: 'relative' , display: {lg :'flex' , md :'flex' , sm :'flex' , xs :'none'}  }}
+                sx={{position: 'relative', display: {lg: 'flex', md: 'flex', sm: 'flex', xs: 'none'}}}
             >
 
                 <input
@@ -140,23 +141,16 @@ const SearchComponent = ({ sx }) => {
 
                     }}
 
-                    style={{
-
-                    }}
+                    style={{}}
 
                 />
                 {
                     open ? (
 
-                        <SearchResults setOpen={setOpen} searchText={searchText} />
+                        <SearchResults setOpen={setOpen} searchText={searchText}/>
 
                     ) : null
                 }
-
-
-
-
-
 
 
             </Box>

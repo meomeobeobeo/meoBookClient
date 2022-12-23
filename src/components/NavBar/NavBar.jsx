@@ -1,23 +1,31 @@
-import  { useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import useStyles from './styles'
-import { AppBar, Avatar, IconButton, Toolbar, Typography, Box, ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import {
+    AppBar,
+    Avatar,
+    Box,
+    IconButton,
+    ListItemIcon,
+    ListItemText,
+    Menu,
+    MenuItem,
+    Toolbar,
+    Typography
+} from '@mui/material'
+import {Link, useLocation, useNavigate} from 'react-router-dom'
 
-import { RiMessengerFill, RiMessengerLine } from 'react-icons/ri'
-import { IoCompassOutline, IoCompassSharp } from 'react-icons/io5'
-import { AiFillHeart, AiOutlineHeart, AiOutlineHome, AiFillHome, AiOutlineLogin, AiOutlineProfile } from 'react-icons/ai'
-import { IoCreateOutline, IoCreateSharp } from 'react-icons/io5'
+import {RiMessengerFill, RiMessengerLine} from 'react-icons/ri'
+import {IoCreateOutline, IoCreateSharp} from 'react-icons/io5'
+import {AiFillHeart, AiFillHome, AiOutlineHeart, AiOutlineHome, AiOutlineLogin, AiOutlineProfile} from 'react-icons/ai'
 
 
 import FormLog from '../Form/FormLog';
 
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 
 import Form from '../Form/Form';
-import { authSlice } from '../../redux/authSlice';
-import { useLocation, useNavigate } from 'react-router-dom'
+import {authSlice} from '../../redux/authSlice';
 import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
 import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
@@ -27,17 +35,11 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import SearchComponent from './SearchComponent';
 
 
-
-
-const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
+const NavBar = ({currentId, setCurrentId, user, setUser}) => {
     const navigate = useNavigate()
     const location = useLocation()
     const dispatch = useDispatch()
     const classes = useStyles()
-
-   
-
-
 
 
     const [openPopup, setOpenPopup] = useState(false)
@@ -49,7 +51,6 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
     useEffect(() => {
 
         setUser(JSON.parse(localStorage.getItem('profile')))
-      
 
 
     }, [location])
@@ -72,18 +73,17 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
         <>
             <AppBar className={classes.appBar}>
 
-                <Toolbar sx = {{
-                    width:{
-                        lg:'76%',
-                        sm : '90%',
-                        xs : '90%'
-                    
-                        
+                <Toolbar sx={{
+                    width: {
+                        lg: '76%',
+                        sm: '90%',
+                        xs: '90%'
+
 
                     }
-                }} className={classes.toolBar} >
+                }} className={classes.toolBar}>
 
-                    <Typography variant="h6" className={classes.title} component={Link} to='/' >MeowBook</Typography>
+                    <Typography variant="h6" className={classes.title} component={Link} to='/'>MeowBook</Typography>
                     <SearchComponent/>
                     <Box className={classes.iconBar}>
                         {/* home icon */}
@@ -91,9 +91,9 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
                             setActiveIcon({
                                 ...statusNavBar, homeIconActive: !statusNavBar.homeIconActive
                             })
-                        }} >
-                            {activeIcon.homeIconActive ? <AiOutlineHome /> : <AiFillHome />}
-                        </IconButton >
+                        }}>
+                            {activeIcon.homeIconActive ? <AiOutlineHome/> : <AiFillHome/>}
+                        </IconButton>
 
 
                         {/* messenger icon */}
@@ -104,9 +104,9 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
                                 })
                             }
 
-                        } >
-                            {activeIcon.messageIconActive ? <RiMessengerLine /> : <RiMessengerFill />}
-                        </IconButton >
+                        }>
+                            {activeIcon.messageIconActive ? <RiMessengerLine/> : <RiMessengerFill/>}
+                        </IconButton>
 
 
                         {/* Create post icon */}
@@ -119,9 +119,9 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
 
                             setOpenPopup(!openPopup)
 
-                        }} >
-                            {activeIcon.createIconActive ? <IoCreateOutline /> : <IoCreateSharp />}
-                        </IconButton >
+                        }}>
+                            {activeIcon.createIconActive ? <IoCreateOutline/> : <IoCreateSharp/>}
+                        </IconButton>
                         {/* compass icon  */}
                         {/* <IconButton onClick={() => {
                             setActiveIcon({
@@ -140,14 +140,13 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
                                 ...statusNavBar,
                                 likeIconActive: !statusNavBar.likeIconActive
                             })
-                        }} >
-                            {activeIcon.likeIconActive ? <AiOutlineHeart /> : <AiFillHeart />}
-                        </IconButton >
+                        }}>
+                            {activeIcon.likeIconActive ? <AiOutlineHeart/> : <AiFillHeart/>}
+                        </IconButton>
 
                         {/* log in log out and user  */}
 
 
-                       
                         {
 
 
@@ -211,12 +210,12 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
                                         <IconButton
                                             onClick={handleClick}
                                             size="small"
-                                            sx={{ ml: 2 }}
+                                            sx={{ml: 2}}
                                             aria-controls={open ? 'account-menu' : undefined}
                                             aria-haspopup="true"
                                             aria-expanded={open ? 'true' : undefined}
                                         >
-                                            <Avatar sx={{ width: 32, height: 32 }} src={user.user.avatarUrl}>M</Avatar>
+                                            <Avatar sx={{width: 32, height: 32}} src={user.user.avatarUrl}>M</Avatar>
                                         </IconButton>
                                     </Tooltip>
                                     <Menu
@@ -252,21 +251,22 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
                                                 },
                                             },
                                         }}
-                                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                        transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                                        anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                                     >
-                                        <MenuItem component={Link} to={`/profile/${user.user._id || 'undifine'}`} onClick={handleClose}>
+                                        <MenuItem component={Link} to={`/profile/${user.user._id || 'undifine'}`}
+                                                  onClick={handleClose}>
                                             <ListItemIcon>
-                                                <AiOutlineProfile />
+                                                <AiOutlineProfile/>
                                             </ListItemIcon>
-                                            <ListItemText>  Profile.</ListItemText>
+                                            <ListItemText> Profile.</ListItemText>
                                         </MenuItem>
 
-                                        <Divider />
+                                        <Divider/>
 
                                         <MenuItem>
                                             <ListItemIcon>
-                                                <SaveAltIcon fontSize="small" />
+                                                <SaveAltIcon fontSize="small"/>
                                             </ListItemIcon>
                                             <ListItemText>
                                                 Saved
@@ -275,34 +275,34 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
 
                                         <MenuItem>
                                             <ListItemIcon>
-                                                <Settings fontSize="small" />
+                                                <Settings fontSize="small"/>
                                             </ListItemIcon>
                                             Settings
                                         </MenuItem>
 
                                         <MenuItem
-                                            component={Link} 
+                                            component={Link}
                                             to='/auth'
                                             onClick={() => {
-                                                navigate('/', { replace: true })
+                                                navigate('/', {replace: true})
                                                 handleClose()
                                                 dispatch(authSlice.actions.logOut())
 
 
                                             }}>
                                             <ListItemIcon>
-                                                <SwitchAccountIcon fontSize="small" />
+                                                <SwitchAccountIcon fontSize="small"/>
                                             </ListItemIcon>
                                             <ListItemText>
                                                 Switch Accounts
                                             </ListItemText>
                                         </MenuItem>
 
-                                        <Divider />
+                                        <Divider/>
                                         <MenuItem
 
                                             onClick={() => {
-                                                navigate('/', { replace: true })
+                                                navigate('/', {replace: true})
                                                 handleClose()
                                                 dispatch(authSlice.actions.logOut())
 
@@ -311,27 +311,28 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
 
                                         >
                                             <ListItemIcon>
-                                                <Logout fontSize="small" />
+                                                <Logout fontSize="small"/>
                                             </ListItemIcon>
                                             Logout
                                         </MenuItem>
                                     </Menu>
                                 </>
                             ) : (
-                                <IconButton component={Link} to='/auth' variant='contained' color='primary' onClick={() => {
-                                    setActiveIcon({
-                                        homeIconActive: true, messageIconActive: true, createIconActive: true,
-                                        likeIconActive: true, compassIconActive: true
-                                    })
-                                }}>
-                                    <AiOutlineLogin />
+                                <IconButton component={Link} to='/auth' variant='contained' color='primary'
+                                            onClick={() => {
+                                                setActiveIcon({
+                                                    homeIconActive: true,
+                                                    messageIconActive: true,
+                                                    createIconActive: true,
+                                                    likeIconActive: true,
+                                                    compassIconActive: true
+                                                })
+                                            }}>
+                                    <AiOutlineLogin/>
 
                                 </IconButton>
                             )
                         }
-
-
-
 
 
                     </Box>
@@ -339,12 +340,7 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
                 </Toolbar>
 
 
-
-
-
-
             </AppBar>
-
 
 
             {/* Form log to create post */}
@@ -354,7 +350,8 @@ const NavBar = ({ currentId, setCurrentId, user, setUser }) => {
                 setOpenPopup={setOpenPopup}
 
             >
-                <Form currentId={currentId} setCurrentId={setCurrentId} setOpenPopup={setOpenPopup} openPopup={openPopup} />
+                <Form currentId={currentId} setCurrentId={setCurrentId} setOpenPopup={setOpenPopup}
+                      openPopup={openPopup}/>
             </FormLog>
         </>
     )

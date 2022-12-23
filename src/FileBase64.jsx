@@ -58,10 +58,10 @@ export default class FileBase64 extends React.Component {
         return (
             <input
                 id={this.props.id}
-                style = {this.props.sx}
+                style={this.props.sx}
                 type="file"
                 onChange={this.handleChange.bind(this)}
-                multiple={this.props.multiple} />
+                multiple={this.props.multiple}/>
 
         );
     }

@@ -1,10 +1,10 @@
-import { IconButton, ImageListItem, ImageListItemBar } from '@mui/material'
-import React, { useContext, useState } from 'react'
-import { FaRegComment } from 'react-icons/fa'
-import { UserContext } from '../../App'
+import {IconButton, ImageListItem, ImageListItemBar} from '@mui/material'
+import React, {useContext, useState} from 'react'
+import {FaRegComment} from 'react-icons/fa'
+import {UserContext} from '../../App'
 import ModalDetailPost from '../../ModalDetailPost/ModalDetailPost'
 
-const ImageItem = ({ item, cols, rows }) => {
+const ImageItem = ({item, cols, rows}) => {
 
 
     const user = useContext(UserContext).user
@@ -40,13 +40,13 @@ const ImageItem = ({ item, cols, rows }) => {
                 position="top"
                 actionIcon={
                     <IconButton
-                        sx={{ color: 'white' }}
+                        sx={{color: 'white'}}
                         aria-label={`star ${item.title}`}
                         onClick={() => {
                             setOpenDetailPost(true)
                         }}
                     >
-                        <FaRegComment />
+                        <FaRegComment/>
 
                     </IconButton>
                 }
@@ -54,7 +54,9 @@ const ImageItem = ({ item, cols, rows }) => {
             />
 
             {/* modal detail post */}
-            <ModalDetailPost key={item._id} likeAction={likeAction} setLikeAction={setLikeAction} openDetailPost={openDetailPost} setOpenDetailPost={setOpenDetailPost} post={item} user={user} />
+            <ModalDetailPost key={item._id} likeAction={likeAction} setLikeAction={setLikeAction}
+                             openDetailPost={openDetailPost} setOpenDetailPost={setOpenDetailPost} post={item}
+                             user={user}/>
         </ImageListItem>
     )
 }

@@ -1,5 +1,5 @@
-import { Backdrop, Fade, IconButton, Modal, Typography } from '@mui/material';
-import { Box } from '@mui/system'
+import {Backdrop, Fade, IconButton, Modal, Typography} from '@mui/material';
+import {Box} from '@mui/system'
 import React from 'react'
 
 
@@ -8,17 +8,16 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: { lg: '82%', md: '82%', sm: '100%', xs: '100%' },
-    height: { lg: '84%', md: '84%', sm: '100%', xs: '100%' },
-    borderRadius: { lg: '20px', md: '20px', sm: '0px', xs: '0px' },
-
+    width: {lg: '82%', md: '82%', sm: '100%', xs: '100%'},
+    height: {lg: '84%', md: '84%', sm: '100%', xs: '100%'},
+    borderRadius: {lg: '20px', md: '20px', sm: '0px', xs: '0px'},
 
 
     bgcolor: 'background.paper',
 
 };
 
-const BoxOfImage = ({ imgData }) => {
+const BoxOfImage = ({imgData}) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -57,7 +56,7 @@ const BoxOfImage = ({ imgData }) => {
                             sx={{
                                 boxShadow: 'none',
                                 width: '100%',
-                                display: { xs: 'block', sm: 'block', md: 'none', lg: 'none' },
+                                display: {xs: 'block', sm: 'block', md: 'none', lg: 'none'},
                                 borderBottom: '1px solid #ccc',
                                 backgroundColor: '#ccc',
                                 padding: 1,
@@ -65,7 +64,7 @@ const BoxOfImage = ({ imgData }) => {
                             }}
                             onClick={handleClose}
                         >
-                            <IconButton aria-label="settings"  >
+                            <IconButton aria-label="settings">
                                 <Typography variant='body2' fontWeight='600' color='primary'>Exit</Typography>
                             </IconButton>
 
@@ -73,9 +72,9 @@ const BoxOfImage = ({ imgData }) => {
                         <img className="img-message" style={{
                             width: '100%',
                             height: '100%',
-                            borderRadius:'20px',
+                            borderRadius: '20px',
                             objectFit: 'cover'
-                        }} src={imgData} alt={'meomeo'} />
+                        }} src={imgData} alt={'meomeo'}/>
                     </Box>
                 </Fade>
             </Modal>

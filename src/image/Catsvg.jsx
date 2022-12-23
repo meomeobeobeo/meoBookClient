@@ -2,13 +2,13 @@ import React from 'react'
 
 const Catsvg = () => {
     return (
-        <div style = {{display : 'inline-block', color :'inherit' }}>
+        <div style={{display: 'inline-block', color: 'inherit'}}>
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                width="24" height="24" viewBox="0 0 512.000000 512.000000"
-                preserveAspectRatio="xMidYMid meet">
+                 width="24" height="24" viewBox="0 0 512.000000 512.000000"
+                 preserveAspectRatio="xMidYMid meet">
 
                 <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-                    fill="#000000" stroke="none">
+                   fill="#000000" stroke="none">
                     <path d="M3985 4970 c-38 -8 -66 -23 -87 -47 -9 -10 -61 -128 -116 -263 l-100
 -245 -80 -45 c-238 -135 -369 -300 -449 -565 -11 -35 -17 -125 -22 -300 -7
 -223 -10 -256 -30 -306 -37 -95 -126 -180 -223 -210 -18 -6 -118 -15 -223 -19

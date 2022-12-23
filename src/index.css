@@ -1,32 +1,32 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 body {
-  background-color: #fafafa;
+    background-color: #fafafa;
 
-  background-attachment: fixed;
-  background-size: cover;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .imputmessage:focus-visible {
-  outline: none !important;
+    outline: none !important;
 
 }
 
 .flex-center-row {
-  justify-content: center !important;
-  align-items: center !important;
+    justify-content: center !important;
+    align-items: center !important;
 
 
 }
@@ -40,33 +40,35 @@ body {
     right: 2px;
     border: 1px solid #fff;
 }
+
 .dot-sm {
-  padding: 4px;
-  border-radius: 50%;
-  background-color: #78de45;
-  position: absolute;
-  bottom: 4px;
-  right: 2px;
-  border: 1px solid #fff;
+    padding: 4px;
+    border-radius: 50%;
+    background-color: #78de45;
+    position: absolute;
+    bottom: 4px;
+    right: 2px;
+    border: 1px solid #fff;
 
 }
+
 .search-component {
-  width: 268px;
-  height: 36px;
-  background-color: #efefef;
-  border-radius:8px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  cursor: text;
-  border: none;
-  line-height:36px;
-  padding-left: 8px;
-
+    width: 268px;
+    height: 36px;
+    background-color: #efefef;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: text;
+    border: none;
+    line-height: 36px;
+    padding-left: 8px;
 
 
 }
+
 .search-component:focus-visible {
-  outline: none !important;
+    outline: none !important;
 
 }

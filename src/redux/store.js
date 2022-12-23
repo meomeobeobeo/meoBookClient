@@ -6,14 +6,14 @@ import {userData} from './userDataSlice'
 // import logger from 'redux-logger'   
 
 const store = configureStore({
-    reducer:{
-        posts : postsSlice.reducer,
-        auth : authSlice.reducer,
-        userData : userData.reducer
-      
+    reducer: {
+        posts: postsSlice.reducer,
+        auth: authSlice.reducer,
+        userData: userData.reducer
+
     },
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-    
+
 
 })
 
