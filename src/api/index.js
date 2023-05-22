@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const url = 'https://meo-book-server.herokuapp.com'
+const url = 'http://localhost:5000'
 
 
-const API = axios.create({baseURL: 'https://meo-book-server.herokuapp.com/'})
+const API = axios.create({baseURL: url})
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('profile')) {

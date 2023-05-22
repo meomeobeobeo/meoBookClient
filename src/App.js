@@ -26,7 +26,7 @@ function App() {
 
     useEffect(() => {
 
-        socket.current = io("https://meowbook-message-server.herokuapp.com")
+        socket.current = io("http://localhost:8900")
 
 
     }, [])
