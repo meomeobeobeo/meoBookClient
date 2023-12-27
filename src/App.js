@@ -26,7 +26,7 @@ function App() {
 
     useEffect(() => {
 
-        socket.current = io("http://localhost:8900")
+        socket.current = io("https://meobookmessagesocket.meoeco.click")
 
 
     }, [])
